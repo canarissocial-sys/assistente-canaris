@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>ASSISTENTE CANARIS</title>
+  <title>Assistente Canaris</title>
   <style>
     :root{
       --bg:#0b0b0b;
@@ -30,25 +30,37 @@
       width: min(520px, 100%);
       padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
     }
+
+    /* TOPBAR */
     .topbar{
       padding: 14px var(--pad);
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
     }
-    .logo{
-      width:34px;height:34px;border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, #2a2a2a, #0f0f0f);
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .brandLogo{
+      width:36px;height:36px;border-radius:12px;
       border:1px solid var(--border);
-      display:grid;place-items:center;
+      background: #0f0f0f;
       box-shadow: var(--shadow);
-      font-weight:700;
+      object-fit:contain;
+      padding:6px;
     }
     .title{
-      font-size:14px;
-      letter-spacing:.12em;
+      font-size:13px;
+      letter-spacing:.10em;
       color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
+
     .card{
       margin: 10px var(--pad) 0 var(--pad);
       background: rgba(20,20,20,.85);
@@ -60,6 +72,8 @@
     .screen{
       padding: 18px;
     }
+
+    /* HOME / HERO */
     .hero{
       display:flex;
       flex-direction:column;
@@ -68,6 +82,13 @@
       gap:12px;
       min-height: 56vh;
       text-align:center;
+    }
+    .heroLogoBig{
+      width:120px;
+      height:48px;
+      object-fit:contain;
+      margin-bottom:4px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
     .camIcon{
       width:78px;height:78px;border-radius:22px;
@@ -78,21 +99,23 @@
     }
     h1{
       margin:0;
-      font-size:22px;
-      letter-spacing:.02em;
+      font-size:20px;
+      letter-spacing:.01em;
     }
     .sub{
       margin:0;
       color:var(--muted);
       font-size:14px;
       line-height:1.35;
-      max-width: 320px;
+      max-width: 340px;
     }
     .hint{
       margin-top:8px;
       color:#9ca3af;
       font-size:12px;
     }
+
+    /* BUTTONS */
     .actions{
       display:flex;
       flex-direction:column;
@@ -104,7 +127,7 @@
       border:0;
       border-radius:16px;
       padding:14px 14px;
-      font-weight:700;
+      font-weight:800;
       font-size:15px;
       cursor:pointer;
     }
@@ -122,6 +145,8 @@
       color: var(--danger);
       border:1px solid rgba(239,68,68,.35);
     }
+
+    /* PREVIEW */
     .previewWrap{
       display:flex;
       flex-direction:column;
@@ -140,14 +165,57 @@
       gap:10px;
     }
     .row button{ flex:1; }
-    .status{
-      padding: 14px 18px;
-      border-top:1px solid var(--border);
-      color: var(--muted);
+
+    /* SEARCH (FILTRI / CODICE) */
+    .sectionTitle{
+      font-size:16px;
+      font-weight:900;
+      margin:0 0 6px 0;
+    }
+    .sectionSub{
+      margin:0 0 14px 0;
+      color:var(--muted);
       font-size:13px;
+      line-height:1.35;
+    }
+    .panel{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:12px;
+      background: rgba(10,10,10,.45);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    label{
+      font-size:12px;
+      color:#d1d5db;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    select, input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+    }
+    .divider{
+      height:1px;
+      background: var(--border);
+      margin: 10px 0;
+      opacity:.7;
+    }
+    .mini{
+      font-size:12px;
+      color:#9ca3af;
+      margin:0;
     }
 
-    /* RISULTATI */
+    /* RESULTS */
     .resultsHeader{
       display:flex;
       align-items:flex-start;
@@ -161,7 +229,7 @@
       background:#f2f2f2;
       border-radius:999px;
       padding:6px 10px;
-      font-weight:800;
+      font-weight:900;
     }
     .grid{
       display:grid;
@@ -194,7 +262,7 @@
       min-width:0;
     }
     .name{
-      font-weight:800;
+      font-weight:900;
       font-size:14px;
       white-space:nowrap;
       overflow:hidden;
@@ -228,6 +296,13 @@
       margin-top:12px;
     }
     .foot button{ flex:1; }
+
+    .status{
+      padding: 14px 18px;
+      border-top:1px solid var(--border);
+      color: var(--muted);
+      font-size:13px;
+    }
     .hidden{ display:none; }
   </style>
 </head>
@@ -235,61 +310,169 @@
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="logo">C</div>
-      <div class="title">ASSISTENTE CANARIS</div>
+      <div class="brand">
+        <!-- LOGO PICCOLO (TOPBAR) -->
+        <img class="brandLogo" src="logo-canaris.png" alt="Canaris" />
+        <div class="title">ASSISTENTE CANARIS</div>
+      </div>
     </div>
 
     <div class="card">
-      <!-- SCHERMATA 1 -->
-      <div id="screenCapture" class="screen">
+
+      <!-- SCHERMATA 0: HOME (FOTO / FILTRI / CODICE) -->
+      <div id="screenHome" class="screen">
         <div class="hero">
-          <div class="camIcon">📷</div>
+          <!-- LOGO GRANDE IN HOME -->
+          <img class="heroLogoBig" src="logo-canaris.png" alt="Canaris" />
+          <div class="camIcon">✨</div>
+
           <div>
-            <h1>SCATTA UNA FOTO DELL’ABITO</h1>
-            <p class="sub">ABITO APPESO, MANICHINO O INDOSSATO. UNA SOLA FOTO È SUFFICIENTE.</p>
-            <div class="hint">TIP: INQUADRA L’ABITO INTERO, SENZA SFONDI TROPPO CAOTICI.</div>
+            <h1>Trova subito un abito simile</h1>
+            <p class="sub">Scatta una foto, usa i filtri oppure inserisci il codice dell’abito.</p>
+            <div class="hint">Consiglio: se puoi, inquadra l’abito intero e con uno sfondo pulito.</div>
           </div>
 
           <div class="actions">
-            <button class="primary" id="btnTakePhoto">📸 SCATTA FOTO</button>
-            <button class="secondary" id="btnUpload">📁 CARICA DALLA GALLERIA</button>
+            <button class="primary" id="btnGoPhoto">📸 Scatta una foto</button>
+            <button class="secondary" id="btnGoFilters">🔎 Trova con filtri</button>
+            <button class="secondary" id="btnGoCode">⌨️ Inserisci codice abito</button>
           </div>
         </div>
       </div>
 
-      <!-- SCHERMATA 2: ANTEPRIMA -->
+      <!-- SCHERMATA 1: FOTO -->
+      <div id="screenCapture" class="screen hidden">
+        <div class="hero">
+          <div class="camIcon">📷</div>
+          <div>
+            <h1>Scatta una foto dell’abito</h1>
+            <p class="sub">Abito appeso, manichino o indossato. Una sola foto è sufficiente.</p>
+            <div class="hint">Tip: inquadra l’abito intero, senza sfondi troppo caotici.</div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="btnTakePhoto">📸 Scatta foto</button>
+            <button class="secondary" id="btnUpload">📁 Carica dalla galleria</button>
+            <button class="secondary" id="btnBackHome1">← Torna alla home</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHERMATA 1B: FILTRI -->
+      <div id="screenFilters" class="screen hidden">
+        <h2 class="sectionTitle">Trova con filtri</h2>
+        <p class="sectionSub">Seleziona poche caratteristiche e scopri le alternative disponibili.</p>
+
+        <div class="panel">
+          <div>
+            <label>LUNGHEZZA</label>
+            <select id="fLength">
+              <option value="">Seleziona…</option>
+              <option value="ABITI LUNGHI">Abito lungo</option>
+              <option value="ABITI CORTI">Abito corto</option>
+            </select>
+          </div>
+
+          <div>
+            <label>LINEA (FONDAMENTALE)</label>
+            <select id="fLine">
+              <option value="">Seleziona…</option>
+              <option value="MORBIDO">Morbido</option>
+              <option value="SCIVOLATO">Scivolato</option>
+              <option value="SIRENA">Sirena</option>
+              <option value="AMPIO">Ampio</option>
+              <option value="TUBO">Tubo</option>
+              <option value="CORTO DAVANTI LUNGO DIETRO">Corto davanti lungo dietro</option>
+            </select>
+          </div>
+
+          <div>
+            <label>SCOLLO (OPZIONALE)</label>
+            <select id="fNeck">
+              <option value="">Nessuno</option>
+              <option value="SCOLLO A V">A V</option>
+              <option value="OMERALE">Omerale</option>
+              <option value="BRETELLA LARGA">Bretella larga</option>
+              <option value="CUORE">Cuore</option>
+              <option value="FASCIA">Fascia</option>
+            </select>
+          </div>
+
+          <div>
+            <label>COLORE (OPZIONALE)</label>
+            <select id="fColor">
+              <option value="">Nessuno</option>
+              <option value="BLU">Blu</option>
+              <option value="CIPRIA">Cipria</option>
+              <option value="NERO">Nero</option>
+              <option value="VERDE">Verde</option>
+              <option value="ROSSO">Rosso</option>
+              <option value="ALTRO">Altro</option>
+            </select>
+          </div>
+
+          <p class="mini">Nota: oggi è una demo. Poi i filtri useranno i tag Shopify (solo disponibili da ETOS).</p>
+
+          <div class="row">
+            <button class="primary" id="btnSearchByFilters">🔎 Cerca abiti simili</button>
+            <button class="secondary" id="btnBackHome2">← Home</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHERMATA 1C: CODICE -->
+      <div id="screenCode" class="screen hidden">
+        <h2 class="sectionTitle">Inserisci codice abito</h2>
+        <p class="sectionSub">Se hai il codice, trovi subito alternative simili senza foto.</p>
+
+        <div class="panel">
+          <div>
+            <label>CODICE PRODOTTO</label>
+            <input id="codeInput" placeholder="Es. T00251" />
+          </div>
+
+          <p class="mini">Nota: oggi è una demo. Poi leggeremo i tag del prodotto e cercheremo i simili.</p>
+
+          <div class="row">
+            <button class="primary" id="btnSearchByCode">🎯 Trova abiti simili</button>
+            <button class="secondary" id="btnBackHome3">← Home</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHERMATA 2: ANTEPRIMA FOTO -->
       <div id="screenPreview" class="screen hidden">
         <div class="previewWrap">
-          <h1 style="font-size:18px;margin:0;">CONFERMA FOTO</h1>
-          <img id="previewImg" class="previewImg" alt="ANTEPRIMA FOTO" />
+          <h1 style="font-size:18px;margin:0;">Conferma la foto</h1>
+          <img id="previewImg" class="previewImg" alt="Anteprima foto" />
           <div class="row">
-            <button class="primary" id="btnUsePhoto">✅ USA QUESTA FOTO</button>
-            <button class="secondary" id="btnRetake">🔁 RIFAI</button>
+            <button class="primary" id="btnUsePhoto">✅ Usa questa foto</button>
+            <button class="secondary" id="btnRetake">🔁 Rifai</button>
           </div>
-          <button class="danger" id="btnCancel">ANNULLA</button>
+          <button class="danger" id="btnCancel">Annulla</button>
         </div>
       </div>
 
-      <!-- SCHERMATA 3: RISULTATI (DUMMY) -->
+      <!-- SCHERMATA 3: RISULTATI (DEMO) -->
       <div id="screenResults" class="screen hidden">
         <div class="resultsHeader">
           <div>
-            <h1 style="font-size:18px;margin:0;">ABITI SIMILI</h1>
-            <div class="line">RISULTATI FILTRATI PER TAGLIA DISPONIBILE (DEMO)</div>
+            <h1 style="font-size:18px;margin:0;">Abiti simili</h1>
+            <div class="line" id="resultsSubtitle">Risultati demo</div>
           </div>
-          <div class="badge">3–5 TOP</div>
+          <div class="badge">3–5 top</div>
         </div>
 
         <div class="grid" id="resultsList"></div>
 
         <div class="foot">
-          <button class="secondary" id="btnNewPhoto">📷 NUOVA FOTO</button>
-          <button class="primary" id="btnDone">FATTO</button>
+          <button class="secondary" id="btnBackToHomeFromResults">← Home</button>
+          <button class="primary" id="btnDone">Fatto</button>
         </div>
       </div>
 
       <div class="status" id="statusLine">
-        STATO: PRONTA. (QUESTA È UNA DEMO — POI LA COLLEGHIAMO A STYLE.AI + SHOPIFY)
+        Stato: pronta. (Demo — poi colleghiamo Shopify + logica “simili”.)
       </div>
     </div>
 
@@ -300,13 +483,27 @@
   </div>
 
 <script>
+  // SCREENS
+  const screenHome    = document.getElementById('screenHome');
   const screenCapture = document.getElementById('screenCapture');
+  const screenFilters = document.getElementById('screenFilters');
+  const screenCode    = document.getElementById('screenCode');
   const screenPreview = document.getElementById('screenPreview');
   const screenResults = document.getElementById('screenResults');
-  const statusLine = document.getElementById('statusLine');
 
+  const statusLine = document.getElementById('statusLine');
+  const resultsSubtitle = document.getElementById('resultsSubtitle');
+
+  // HOME BUTTONS
+  const btnGoPhoto = document.getElementById('btnGoPhoto');
+  const btnGoFilters = document.getElementById('btnGoFilters');
+  const btnGoCode = document.getElementById('btnGoCode');
+
+  // PHOTO FLOW
   const btnTakePhoto = document.getElementById('btnTakePhoto');
   const btnUpload = document.getElementById('btnUpload');
+  const btnBackHome1 = document.getElementById('btnBackHome1');
+
   const inputCamera = document.getElementById('inputCamera');
   const inputGallery = document.getElementById('inputGallery');
 
@@ -315,20 +512,55 @@
   const btnRetake = document.getElementById('btnRetake');
   const btnCancel = document.getElementById('btnCancel');
 
+  // FILTERS
+  const fLength = document.getElementById('fLength');
+  const fLine = document.getElementById('fLine');
+  const fNeck = document.getElementById('fNeck');
+  const fColor = document.getElementById('fColor');
+  const btnSearchByFilters = document.getElementById('btnSearchByFilters');
+  const btnBackHome2 = document.getElementById('btnBackHome2');
+
+  // CODE
+  const codeInput = document.getElementById('codeInput');
+  const btnSearchByCode = document.getElementById('btnSearchByCode');
+  const btnBackHome3 = document.getElementById('btnBackHome3');
+
+  // RESULTS
   const resultsList = document.getElementById('resultsList');
-  const btnNewPhoto = document.getElementById('btnNewPhoto');
+  const btnBackToHomeFromResults = document.getElementById('btnBackToHomeFromResults');
   const btnDone = document.getElementById('btnDone');
 
   let currentBlobUrl = null;
   let currentFile = null;
 
   function show(screen){
-    [screenCapture, screenPreview, screenResults].forEach(s => s.classList.add('hidden'));
+    [screenHome, screenCapture, screenFilters, screenCode, screenPreview, screenResults]
+      .forEach(s => s.classList.add('hidden'));
     screen.classList.remove('hidden');
   }
 
-  function setStatus(txt){ statusLine.textContent = "STATO: " + txt; }
+  function setStatus(txt){ statusLine.textContent = "Stato: " + txt; }
 
+  // HOME NAV
+  btnGoPhoto.addEventListener('click', () => {
+    show(screenCapture);
+    setStatus("pronta. scatta una foto.");
+  });
+  btnGoFilters.addEventListener('click', () => {
+    show(screenFilters);
+    setStatus("seleziona i filtri.");
+  });
+  btnGoCode.addEventListener('click', () => {
+    show(screenCode);
+    setStatus("inserisci il codice.");
+  });
+
+  btnBackHome1.addEventListener('click', () => { show(screenHome); setStatus("pronta."); });
+  btnBackHome2.addEventListener('click', () => { show(screenHome); setStatus("pronta."); });
+  btnBackHome3.addEventListener('click', () => { show(screenHome); setStatus("pronta."); });
+  btnBackToHomeFromResults.addEventListener('click', () => { show(screenHome); setStatus("pronta."); });
+
+  // PHOTO FLOW
   function handleFile(file){
     if(!file) return;
     currentFile = file;
@@ -336,7 +568,7 @@
     currentBlobUrl = URL.createObjectURL(file);
     previewImg.src = currentBlobUrl;
     show(screenPreview);
-    setStatus("FOTO CARICATA. CONFERMA O RIFAI.");
+    setStatus("foto caricata. conferma o rifai.");
   }
 
   btnTakePhoto.addEventListener('click', () => {
@@ -354,25 +586,25 @@
 
   btnRetake.addEventListener('click', () => {
     show(screenCapture);
-    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
+    setStatus("pronta. scatta una nuova foto.");
   });
 
   btnCancel.addEventListener('click', () => {
     currentFile = null;
     if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
     currentBlobUrl = null;
-    show(screenCapture);
-    setStatus("PRONTA.");
+    show(screenHome);
+    setStatus("pronta.");
   });
 
-  // DEMO RISULTATI (POI QUI CI VA STYLE.AI + SHOPIFY)
+  // DEMO RISULTATI
   function renderDemoResults(){
     const demo = [
-      {name:"ABITO LUNGO CON SPACCO", info:"COLORE SIMILE • LINEA SIMILE", sizes:["42","44 DISP.","46"], okIndex:1},
-      {name:"ABITO SCIVOLATO ELEGANTE", info:"DETTAGLIO SIMILE • TONO SIMILE", sizes:["40","42 DISP.","44"], okIndex:1},
-      {name:"ABITO STRUTTURATO", info:"ALTERNATIVA VICINA • MODELLO AFFINE", sizes:["44 DISP.","46"], okIndex:0},
-      {name:"ABITO MONOSPALLA", info:"VARIANTE STILE • COLORE VICINO", sizes:["42","44 DISP."], okIndex:1},
-      {name:"ABITO CON SCHIENA APERTA", info:"DETTAGLIO FORTE • LINEA SIMILE", sizes:["44 DISP.","48"], okIndex:0},
+      {name:"Abito lungo con spacco", info:"Colore simile • Linea simile", sizes:["42","44 DISP.","46"], okIndex:1},
+      {name:"Abito scivolato elegante", info:"Dettaglio simile • Tono simile", sizes:["40","42 DISP.","44"], okIndex:1},
+      {name:"Abito strutturato", info:"Alternativa vicina • Modello affine", sizes:["44 DISP.","46"], okIndex:0},
+      {name:"Abito monospalla", info:"Variante stile • Colore vicino", sizes:["42","44 DISP."], okIndex:1},
+      {name:"Abito con schiena aperta", info:"Dettaglio forte • Linea simile", sizes:["44 DISP.","48"], okIndex:0},
     ];
 
     resultsList.innerHTML = "";
@@ -393,30 +625,54 @@
     });
   }
 
+  async function goResults(subtitle){
+    show(screenResults);
+    resultsSubtitle.textContent = subtitle || "Risultati demo";
+    setStatus("elaborazione... (demo)");
+    resultsList.innerHTML = "";
+    await new Promise(r => setTimeout(r, 800));
+    renderDemoResults();
+    setStatus("risultati pronti. (demo)");
+  }
+
+  // FOTO -> RISULTATI
   btnUsePhoto.addEventListener('click', async () => {
     if(!currentFile) return;
-
-    show(screenResults);
-    setStatus("ELABORAZIONE... (DEMO)");
-    resultsList.innerHTML = "";
-    // SIMULA 1.2s DI “AI”
-    await new Promise(r => setTimeout(r, 1200));
-    renderDemoResults();
-    setStatus("RISULTATI PRONTI. (DEMO) POI QUI ARRIVERANNO I DATI REALI DA SHOPIFY.");
+    await goResults("Risultati trovati partendo dalla foto (demo)");
   });
 
-  btnNewPhoto.addEventListener('click', () => {
-    show(screenCapture);
-    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
+  // FILTRI -> RISULTATI
+  btnSearchByFilters.addEventListener('click', async () => {
+    // Se vuoi renderlo obbligatorio: lunghezza e linea
+    if(!fLength.value || !fLine.value){
+      alert("Seleziona almeno LUNGHEZZA e LINEA.");
+      return;
+    }
+    const sub = `Filtri: ${fLength.value} • ${fLine.value}` +
+                (fNeck.value ? ` • ${fNeck.value}` : "") +
+                (fColor.value ? ` • ${fColor.value}` : "");
+    await goResults(sub + " (demo)");
+  });
+
+  // CODICE -> RISULTATI
+  btnSearchByCode.addEventListener('click', async () => {
+    const code = (codeInput.value || "").trim();
+    if(!code){
+      alert("Inserisci un codice prodotto (es. T00251).");
+      return;
+    }
+    await goResults(`Codice: ${code} → abiti simili (demo)`);
   });
 
   btnDone.addEventListener('click', () => {
-    show(screenCapture);
-    setStatus("PRONTA.");
+    show(screenHome);
+    setStatus("pronta.");
   });
 
   // AVVIO
-  show(screenCapture);
+  show(screenHome);
+  setStatus("pronta.");
 </script>
 </body>
 </html>
+
