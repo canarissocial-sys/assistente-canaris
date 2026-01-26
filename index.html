@@ -12,11 +12,14 @@
       --text:#f2f2f2;
       --muted:#9ca3af;
       --accent:#22c55e;
+      --danger:#ef4444;
       --border:#2a2a2a;
       --radius:18px;
       --shadow:0 10px 25px rgba(0,0,0,.35);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
+
+    *{ box-sizing:border-box; }
 
     body{
       margin:0;
@@ -50,12 +53,14 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      box-shadow: var(--shadow);
     }
 
     .logo img{
       width:100%;
       height:100%;
       object-fit:contain;
+      display:block;
     }
 
     .title{
@@ -76,6 +81,7 @@
       padding:22px 18px;
     }
 
+    /* TABS */
     .tabs{
       display:flex;
       gap:10px;
@@ -89,8 +95,21 @@
       border:1px solid var(--border);
       background:#0f0f0f;
       color:var(--muted);
-      font-weight:700;
+      font-weight:800;
       font-size:14px;
+      cursor:pointer;
+      user-select:none;
+      text-align:center;
+      line-height:1.05;
+      transition: .15s ease;
+    }
+    .tab small{
+      display:block;
+      font-weight:700;
+      color:#7b8592;
+      margin-top:6px;
+      font-size:12px;
+      letter-spacing:.06em;
     }
 
     .tab.active{
@@ -99,6 +118,7 @@
       box-shadow:0 0 0 1px rgba(34,197,94,.4);
     }
 
+    /* HERO */
     .hero{
       text-align:center;
       display:flex;
@@ -121,15 +141,25 @@
     h1{
       margin:0;
       font-size:22px;
+      letter-spacing:.02em;
     }
 
     .sub{
       color:var(--muted);
       font-size:14px;
       line-height:1.4;
-      max-width:320px;
+      max-width:340px;
+      margin:0;
     }
 
+    .hint{
+      color:#7b8592;
+      font-size:12px;
+      margin-top:2px;
+      letter-spacing:.02em;
+    }
+
+    /* INPUTS + ACTIONS */
     .actions{
       display:flex;
       flex-direction:column;
@@ -142,7 +172,7 @@
       border:0;
       border-radius:16px;
       padding:16px;
-      font-weight:800;
+      font-weight:900;
       font-size:15px;
       cursor:pointer;
     }
@@ -158,6 +188,193 @@
       border:1px solid var(--border);
     }
 
+    .danger{
+      background:transparent;
+      color:var(--danger);
+      border:1px solid rgba(239,68,68,.35);
+    }
+
+    /* SKU + FILTERS */
+    .form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .label{
+      font-weight:800;
+      color:#d1d5db;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .input{
+      width:100%;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:var(--text);
+      font-size:15px;
+      outline:none;
+    }
+    .input:focus{
+      border-color: rgba(34,197,94,.6);
+      box-shadow: 0 0 0 2px rgba(34,197,94,.15);
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:#cbd5e1;
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      transition:.12s ease;
+    }
+
+    .chip.active{
+      border-color: rgba(34,197,94,.55);
+      color:#bbf7d0;
+      box-shadow: 0 0 0 2px rgba(34,197,94,.12);
+    }
+
+    /* PREVIEW */
+    .previewWrap{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .previewImg{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      max-height:55vh;
+      object-fit:contain;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+    }
+    .row button{ flex:1; }
+
+    /* RESULTS */
+    .resultsHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .badge{
+      font-size:12px;
+      color:#0b0b0b;
+      background:#f2f2f2;
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+
+    .item{
+      display:flex;
+      gap:12px;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(10,10,10,.45);
+    }
+
+    .thumb{
+      width:74px;height:96px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, #1b1b1b, #0e0e0e);
+      display:grid;place-items:center;
+      color:#9ca3af;
+      font-size:12px;
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:.92;
+    }
+
+    .meta{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+
+    .name{
+      font-weight:900;
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .line{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .stock{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+
+    .pill{
+      font-size:12px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:#d1d5db;
+      background: rgba(255,255,255,.03);
+      font-weight:800;
+    }
+
+    .pill.ok{
+      border-color: rgba(34,197,94,.4);
+      color:#bbf7d0;
+    }
+
+    .foot{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .foot button{ flex:1; }
+
+    /* STATUS */
     .status{
       margin-top:16px;
       padding:14px;
@@ -166,6 +383,8 @@
       font-size:13px;
       text-align:center;
     }
+
+    .hidden{ display:none !important; }
   </style>
 </head>
 
@@ -175,46 +394,362 @@
     <!-- TOP -->
     <div class="topbar">
       <div class="logo">
-        <img src="logo-canaris.png" alt="Canaris">
+        <!-- IMPORTANTE: il file deve chiamarsi ESATTAMENTE "logo.png" ed essere nella root del repo -->
+        <img src="logo.png" alt="Canaris">
       </div>
       <div class="title">ASSISTENTE CANARIS</div>
     </div>
 
     <div class="card">
-      <div class="screen">
 
-        <!-- MODALITÀ -->
+      <!-- TABS -->
+      <div class="screen">
         <div class="tabs">
-          <div class="tab active">FOTO<br><small>SCATTA / CARICA</small></div>
-          <div class="tab">CODICE<br><small>INSERISCI SKU</small></div>
-          <div class="tab">FILTRI<br><small>TAG RAPIDI</small></div>
+          <div class="tab active" data-tab="foto">FOTO<small>SCATTA / CARICA</small></div>
+          <div class="tab" data-tab="codice">CODICE<small>INSERISCI SKU</small></div>
+          <div class="tab" data-tab="filtri">FILTRI<small>TAG RAPIDI</small></div>
         </div>
 
-        <!-- HERO -->
-        <div class="hero">
-          <div class="camIcon">📷</div>
+        <!-- SCHERMATA FOTO -->
+        <div id="tab-foto">
+          <div class="hero">
+            <div class="camIcon">📷</div>
 
-          <h1>TROVA ABITI SIMILI</h1>
-          <p class="sub">
-            SCATTA UNA FOTO DELL’ABITO (APPESO, MANICHINO O INDOSSATO).
-            TI MOSTRERÀ LE MIGLIORI ALTERNATIVE DISPONIBILI IN ATELIER.
-          </p>
+            <h1>TROVA ABITI SIMILI</h1>
+            <p class="sub">
+              SCATTA UNA FOTO DELL’ABITO (APPESO, MANICHINO O INDOSSATO).
+              POI TI MOSTRA I PIÙ SIMILI DISPONIBILI.
+            </p>
+            <div class="hint">TIP: INQUADRA L’ABITO INTERO, SENZA SFONDI TROPPO CAOTICI.</div>
 
-          <div class="actions">
-            <button class="primary">📸 SCATTA FOTO</button>
-            <button class="secondary">📁 CARICA DALLA GALLERIA</button>
+            <div class="actions">
+              <button class="primary" id="btnTakePhoto">📸 SCATTA FOTO</button>
+              <button class="secondary" id="btnUpload">📁 CARICA DALLA GALLERIA</button>
+            </div>
           </div>
         </div>
 
-        <div class="status">
-          STATO: PRONTA (DEMO BY ANTONLEMN )
+        <!-- SCHERMATA CODICE -->
+        <div id="tab-codice" class="hidden">
+          <div class="hero" style="gap:10px;">
+            <div class="camIcon">🔎</div>
+            <h1>CERCA PER CODICE</h1>
+            <p class="sub">INSERISCI LO SKU/CODICE ARTICOLO. POI TI MOSTRA GLI ABITI SIMILI (DEMO).</p>
+          </div>
+
+          <div class="form" style="margin-top:18px;">
+            <div class="label">CODICE / SKU</div>
+            <input id="skuInput" class="input" placeholder="ES. T00251" autocomplete="off" inputmode="text" />
+            <div class="actions" style="margin-top:6px;">
+              <button class="primary" id="btnSearchSku">CERCA SIMILI</button>
+              <button class="secondary" id="btnClearSku">PULISCI</button>
+            </div>
+          </div>
         </div>
 
+        <!-- SCHERMATA FILTRI -->
+        <div id="tab-filtri" class="hidden">
+          <div class="hero" style="gap:10px;">
+            <div class="camIcon">🎛️</div>
+            <h1>FILTRI RAPIDI</h1>
+            <p class="sub">SELEZIONA 2–3 TAG (LINEA, LUNGHEZZA, SCOLLO). POI TI MOSTRA GLI ABITI SIMILI (DEMO).</p>
+          </div>
+
+          <div class="form" style="margin-top:18px;">
+            <div class="label">LINEA</div>
+            <div class="chips" id="chipsLinea">
+              <div class="chip">MORBIDO</div>
+              <div class="chip">SCIVOLATO</div>
+              <div class="chip">SIRENA</div>
+              <div class="chip">AMPIO</div>
+              <div class="chip">TUBO</div>
+              <div class="chip">CORTOAVANTI LUNGO DIETRO</div>
+            </div>
+
+            <div class="label" style="margin-top:10px;">LUNGHEZZA</div>
+            <div class="chips" id="chipsLunghezza">
+              <div class="chip">ABITI CORTI</div>
+              <div class="chip">ABITI LUNGHI</div>
+            </div>
+
+            <div class="label" style="margin-top:10px;">SCOLLO</div>
+            <div class="chips" id="chipsScollo">
+              <div class="chip">A V</div>
+              <div class="chip">OMERALE</div>
+              <div class="chip">BRETELLA LARGA</div>
+              <div class="chip">CUORE</div>
+              <div class="chip">FASCIA</div>
+            </div>
+
+            <div class="actions" style="margin-top:14px;">
+              <button class="primary" id="btnSearchFilters">TROVA SIMILI</button>
+              <button class="secondary" id="btnClearFilters">RESET</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- SCHERMATA ANTEPRIMA FOTO -->
+      <div id="screenPreview" class="screen hidden">
+        <div class="previewWrap">
+          <h1 style="font-size:18px;margin:0;">CONFERMA FOTO</h1>
+          <img id="previewImg" class="previewImg" alt="ANTEPRIMA FOTO" />
+          <div class="row">
+            <button class="primary" id="btnUsePhoto">✅ USA QUESTA FOTO</button>
+            <button class="secondary" id="btnRetake">🔁 RIFAI</button>
+          </div>
+          <button class="danger" id="btnCancel">ANNULLA</button>
+        </div>
+      </div>
+
+      <!-- SCHERMATA RISULTATI (DEMO) -->
+      <div id="screenResults" class="screen hidden">
+        <div class="resultsHeader">
+          <div>
+            <h1 style="font-size:18px;margin:0;">ABITI SIMILI</h1>
+            <div class="line" id="resultsSub">RISULTATI (DEMO)</div>
+          </div>
+          <div class="badge">3–5 TOP</div>
+        </div>
+
+        <div class="grid" id="resultsList"></div>
+
+        <div class="foot">
+          <button class="secondary" id="btnBackHome">⬅︎ HOME</button>
+          <button class="primary" id="btnDone">FATTO</button>
+        </div>
+      </div>
+
+      <div class="status" id="statusLine">
+        STATO: PRONTA (DEMO — POI COLLEGHIAMO SHOPIFY + STYLE.AI)
+      </div>
+
     </div>
 
+    <!-- INPUT NASCOSTI -->
+    <input id="inputCamera" type="file" accept="image/*" capture="environment" class="hidden" />
+    <input id="inputGallery" type="file" accept="image/*" class="hidden" />
+
   </div>
+
+<script>
+  // ---------- ELEMENTI ----------
+  const tabs = document.querySelectorAll('.tab');
+  const tabFoto = document.getElementById('tab-foto');
+  const tabCodice = document.getElementById('tab-codice');
+  const tabFiltri = document.getElementById('tab-filtri');
+
+  const screenPreview = document.getElementById('screenPreview');
+  const screenResults = document.getElementById('screenResults');
+  const statusLine = document.getElementById('statusLine');
+
+  const btnTakePhoto = document.getElementById('btnTakePhoto');
+  const btnUpload = document.getElementById('btnUpload');
+  const inputCamera = document.getElementById('inputCamera');
+  const inputGallery = document.getElementById('inputGallery');
+
+  const previewImg = document.getElementById('previewImg');
+  const btnUsePhoto = document.getElementById('btnUsePhoto');
+  const btnRetake = document.getElementById('btnRetake');
+  const btnCancel = document.getElementById('btnCancel');
+
+  const resultsList = document.getElementById('resultsList');
+  const resultsSub = document.getElementById('resultsSub');
+  const btnBackHome = document.getElementById('btnBackHome');
+  const btnDone = document.getElementById('btnDone');
+
+  const skuInput = document.getElementById('skuInput');
+  const btnSearchSku = document.getElementById('btnSearchSku');
+  const btnClearSku = document.getElementById('btnClearSku');
+
+  const btnSearchFilters = document.getElementById('btnSearchFilters');
+  const btnClearFilters = document.getElementById('btnClearFilters');
+
+  let currentBlobUrl = null;
+  let currentFile = null;
+
+  // ---------- UTILS ----------
+  function setStatus(txt){ statusLine.textContent = "STATO: " + txt; }
+
+  function showHome(){
+    // home = area tabs
+    screenPreview.classList.add('hidden');
+    screenResults.classList.add('hidden');
+    document.querySelector('.card > .screen').classList.remove('hidden');
+    setStatus("PRONTA (DEMO — POI COLLEGHIAMO SHOPIFY + STYLE.AI)");
+  }
+
+  function showPreview(){
+    document.querySelector('.card > .screen').classList.add('hidden');
+    screenResults.classList.add('hidden');
+    screenPreview.classList.remove('hidden');
+  }
+
+  function showResults(){
+    document.querySelector('.card > .screen').classList.add('hidden');
+    screenPreview.classList.add('hidden');
+    screenResults.classList.remove('hidden');
+  }
+
+  function activateTab(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    tabFoto.classList.toggle('hidden', name !== 'foto');
+    tabCodice.classList.toggle('hidden', name !== 'codice');
+    tabFiltri.classList.toggle('hidden', name !== 'filtri');
+  }
+
+  // ---------- TABS CLICK ----------
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      const target = t.dataset.tab;
+      activateTab(target);
+      setStatus("PRONTA (MODALITÀ: " + target.toUpperCase() + ")");
+    });
+  });
+
+  // ---------- FOTO FLOW ----------
+  function handleFile(file){
+    if(!file) return;
+    currentFile = file;
+    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+    currentBlobUrl = URL.createObjectURL(file);
+    previewImg.src = currentBlobUrl;
+    showPreview();
+    setStatus("FOTO CARICATA. CONFERMA O RIFAI.");
+  }
+
+  btnTakePhoto.addEventListener('click', () => {
+    inputCamera.value = "";
+    inputCamera.click();
+  });
+
+  btnUpload.addEventListener('click', () => {
+    inputGallery.value = "";
+    inputGallery.click();
+  });
+
+  inputCamera.addEventListener('change', e => handleFile(e.target.files[0]));
+  inputGallery.addEventListener('change', e => handleFile(e.target.files[0]));
+
+  btnRetake.addEventListener('click', () => {
+    showHome();
+    activateTab('foto');
+    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
+  });
+
+  btnCancel.addEventListener('click', () => {
+    currentFile = null;
+    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+    currentBlobUrl = null;
+    showHome();
+    activateTab('foto');
+  });
+
+  // ---------- CHIP TOGGLE ----------
+  function setupChipToggle(containerId){
+    const container = document.getElementById(containerId);
+    if(!container) return [];
+    const chips = Array.from(container.querySelectorAll('.chip'));
+    chips.forEach(ch => ch.addEventListener('click', () => ch.classList.toggle('active')));
+    return chips;
+  }
+  const chipsLinea = setupChipToggle('chipsLinea');
+  const chipsLunghezza = setupChipToggle('chipsLunghezza');
+  const chipsScollo = setupChipToggle('chipsScollo');
+
+  function getActiveChipsText(){
+    const act = document.querySelectorAll('.chip.active');
+    return Array.from(act).map(x => x.textContent.trim());
+  }
+
+  // ---------- DEMO RESULTS ----------
+  function renderDemoResults(seedLabel){
+    const demo = [
+      {name:"ABITO LUNGO CON SPACCO", info:"COLORE SIMILE • LINEA SIMILE", sizes:["42","44 DISP.","46"], okIndex:1},
+      {name:"ABITO SCIVOLATO ELEGANTE", info:"DETTAGLIO SIMILE • TONO SIMILE", sizes:["40","42 DISP.","44"], okIndex:1},
+      {name:"ABITO STRUTTURATO", info:"ALTERNATIVA VICINA • MODELLO AFFINE", sizes:["44 DISP.","46"], okIndex:0},
+      {name:"ABITO MONOSPALLA", info:"VARIANTE STILE • COLORE VICINO", sizes:["42","44 DISP."], okIndex:1},
+      {name:"ABITO CON SCHIENA APERTA", info:"DETTAGLIO FORTE • LINEA SIMILE", sizes:["44 DISP.","48"], okIndex:0},
+    ];
+
+    resultsList.innerHTML = "";
+    demo.slice(0,5).forEach((p, idx) => {
+      const div = document.createElement('div');
+      div.className = "item";
+      div.innerHTML = `
+        <div class="thumb">${currentBlobUrl ? `<img src="${currentBlobUrl}" alt="foto">` : "FOTO"}</div>
+        <div class="meta">
+          <div class="name">${idx+1}. ${p.name}</div>
+          <div class="line">${p.info}</div>
+          <div class="stock">
+            ${p.sizes.map((s,i)=> `<span class="pill ${i===p.okIndex?'ok':''}">${s}</span>`).join('')}
+          </div>
+        </div>
+      `;
+      resultsList.appendChild(div);
+    });
+
+    resultsSub.textContent = seedLabel ? `RISULTATI (DEMO) • ${seedLabel}` : "RISULTATI (DEMO)";
+  }
+
+  async function runFakeAI(seedLabel){
+    showResults();
+    resultsList.innerHTML = "";
+    setStatus("ELABORAZIONE... (DEMO)");
+    await new Promise(r => setTimeout(r, 900));
+    renderDemoResults(seedLabel);
+    setStatus("RISULTATI PRONTI (DEMO). POI QUI ARRIVERANNO I DATI REALI DA SHOPIFY.");
+  }
+
+  btnUsePhoto.addEventListener('click', async () => {
+    if(!currentFile) return;
+    await runFakeAI("FOTO");
+  });
+
+  // ---------- SKU SEARCH ----------
+  btnSearchSku.addEventListener('click', async () => {
+    const sku = (skuInput.value || "").trim();
+    if(!sku){
+      setStatus("INSERISCI UNO SKU (ES. T00251)");
+      skuInput.focus();
+      return;
+    }
+    await runFakeAI("CODICE: " + sku.toUpperCase());
+  });
+
+  btnClearSku.addEventListener('click', () => {
+    skuInput.value = "";
+    setStatus("PRONTA (MODALITÀ: CODICE)");
+    skuInput.focus();
+  });
+
+  // ---------- FILTER SEARCH ----------
+  btnSearchFilters.addEventListener('click', async () => {
+    const tags = getActiveChipsText();
+    if(tags.length === 0){
+      setStatus("SELEZIONA ALMENO 1 TAG");
+      return;
+    }
+    await runFakeAI("FILTRI: " + tags.join(", "));
+  });
+
+  btnClearFilters.addEventListener('click', () => {
+    document.querySelectorAll('.chip.active').forEach(c => c.classList.remove('active'));
+    setStatus("PRONTA (MODALITÀ: FILTRI)");
+  });
+
+  // ---------- RESULTS BUTTONS ----------
+  btnBackHome.addEventListener('click', () => {
+    showHome();
+  });
+
+  btnDone.addEventListener('click', () => {
+    showHome();
+  });
+
+  // ---------- AVVIO ----------
+  activateTab('foto');
+  showHome();
+</script>
 </body>
 </html>
-
-
