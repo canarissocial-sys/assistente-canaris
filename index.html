@@ -10,19 +10,17 @@
       --bg:#0b0b0b;
       --card:#141414;
       --text:#f2f2f2;
-      --muted:#b8b8b8;
+      --muted:#9ca3af;
       --accent:#22c55e;
-      --danger:#ef4444;
       --border:#2a2a2a;
       --radius:18px;
-      --pad:16px;
-      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --shadow:0 10px 25px rgba(0,0,0,.35);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     body{
       margin:0;
-      background:linear-gradient(180deg, #050505, #0b0b0b);
+      background:linear-gradient(180deg,#050505,#0b0b0b);
       color:var(--text);
       min-height:100vh;
       display:flex;
@@ -30,683 +28,191 @@
     }
 
     .app{
-      width: min(520px, 100%);
-      padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
+      width:min(520px,100%);
+      padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);
     }
 
+    /* TOPBAR */
     .topbar{
-      padding: 14px var(--pad);
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
+      padding:14px 10px;
     }
 
-    .brandLogo{
-      width:34px;
-      height:34px;
-      border-radius:12px;
+    .logo{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      overflow:hidden;
       border:1px solid var(--border);
-      box-shadow: var(--shadow);
-      object-fit: cover;
       background:#fff;
-      flex:0 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
     }
 
     .title{
       font-size:14px;
-      letter-spacing:.12em;
+      letter-spacing:.18em;
       color:var(--muted);
     }
 
     .card{
-      margin: 10px var(--pad) 0 var(--pad);
-      background: rgba(20,20,20,.85);
+      background:rgba(20,20,20,.9);
       border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
 
     .screen{
-      padding: 18px;
+      padding:22px 18px;
     }
 
-    /* TAB */
     .tabs{
       display:flex;
-      gap:8px;
-      margin-bottom:14px;
-    }
-    .tab{
-      flex:1;
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      font-weight:800;
-      font-size:13px;
-      cursor:pointer;
-    }
-    .tab.active{
-      border-color: rgba(34,197,94,.45);
-      box-shadow: 0 0 0 2px rgba(34,197,94,.12) inset;
-    }
-    .tab small{
-      display:block;
-      font-weight:600;
-      color: var(--muted);
-      font-size:11px;
-      margin-top:2px;
-      letter-spacing:.02em;
+      gap:10px;
+      margin-bottom:22px;
     }
 
-    /* HERO FOTO */
+    .tab{
+      flex:1;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:var(--muted);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .tab.active{
+      border-color:var(--accent);
+      color:#22c55e;
+      box-shadow:0 0 0 1px rgba(34,197,94,.4);
+    }
+
     .hero{
+      text-align:center;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:center;
-      gap:12px;
-      min-height: 48vh;
-      text-align:center;
+      gap:14px;
     }
+
     .camIcon{
-      width:78px;height:78px;border-radius:22px;
+      width:80px;
+      height:80px;
+      border-radius:24px;
       border:1px solid var(--border);
-      background: linear-gradient(180deg, #1d1d1d, #101010);
-      display:grid;place-items:center;
-      font-size:32px;
+      background:linear-gradient(180deg,#1d1d1d,#101010);
+      display:grid;
+      place-items:center;
+      font-size:34px;
     }
 
     h1{
       margin:0;
       font-size:22px;
-      letter-spacing:.02em;
     }
 
     .sub{
-      margin:0;
       color:var(--muted);
       font-size:14px;
-      line-height:1.35;
-      max-width: 360px;
-    }
-
-    .hint{
-      margin-top:8px;
-      color:#9ca3af;
-      font-size:12px;
+      line-height:1.4;
+      max-width:320px;
     }
 
     .actions{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:12px;
       width:100%;
-      margin-top:14px;
+      margin-top:16px;
     }
 
     button{
       border:0;
       border-radius:16px;
-      padding:14px 14px;
+      padding:16px;
       font-weight:800;
       font-size:15px;
       cursor:pointer;
     }
 
     .primary{
-      background: var(--accent);
-      color:#06120a;
+      background:var(--accent);
+      color:#06230f;
     }
+
     .secondary{
-      background: transparent;
-      color: var(--text);
+      background:transparent;
+      color:var(--text);
       border:1px solid var(--border);
     }
-    .danger{
-      background: transparent;
-      color: var(--danger);
-      border:1px solid rgba(239,68,68,.35);
-    }
-
-    /* FORM */
-    .form{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      min-height: 48vh;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    label{
-      font-size:12px;
-      color: var(--muted);
-      letter-spacing:.06em;
-      font-weight:800;
-      text-transform:uppercase;
-    }
-    input, select{
-      width:100%;
-      background: rgba(0,0,0,.25);
-      color: var(--text);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px 12px;
-      font-size:14px;
-      outline:none;
-    }
-    input::placeholder{ color:#8b8b8b; }
-
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-
-    .previewWrap{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .previewImg{
-      width:100%;
-      border-radius: 16px;
-      border:1px solid var(--border);
-      background:#0f0f0f;
-      max-height: 55vh;
-      object-fit: contain;
-    }
-    .row{
-      display:flex;
-      gap:10px;
-    }
-    .row button{ flex:1; }
 
     .status{
-      padding: 14px 18px;
+      margin-top:16px;
+      padding:14px;
       border-top:1px solid var(--border);
-      color: var(--muted);
-      font-size:13px;
-    }
-
-    /* RISULTATI */
-    .resultsHeader{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-    }
-    .badge{
-      font-size:12px;
-      color:#0b0b0b;
-      background:#f2f2f2;
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:900;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-    }
-    .item{
-      display:flex;
-      gap:12px;
-      padding:12px;
-      border:1px solid var(--border);
-      border-radius:16px;
-      background: rgba(10,10,10,.45);
-    }
-    .thumb{
-      width:74px;height:96px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, #1b1b1b, #0e0e0e);
-      display:grid;place-items:center;
-      color:#9ca3af;
-      font-size:12px;
-      flex:0 0 auto;
-      overflow:hidden;
-    }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .meta{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-width:0;
-    }
-    .name{
-      font-weight:900;
-      font-size:14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .line{
       color:var(--muted);
       font-size:13px;
-    }
-    .stock{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:4px;
-    }
-    .pill{
-      font-size:12px;
-      padding:5px 8px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      color:#d1d5db;
-      background: rgba(255,255,255,.03);
-    }
-    .pill.ok{
-      border-color: rgba(34,197,94,.4);
-      color:#bbf7d0;
-    }
-    .foot{
-      display:flex;
-      gap:10px;
-      margin-top:12px;
-    }
-    .foot button{ flex:1; }
-
-    .hidden{ display:none; }
-
-    .note{
-      color:#9ca3af;
-      font-size:12px;
-      line-height:1.35;
-      margin-top:2px;
+      text-align:center;
     }
   </style>
 </head>
 
 <body>
   <div class="app">
+
+    <!-- TOP -->
     <div class="topbar">
-      <img class="brandLogo" src="./logo-canaris.png" alt="CANARIS" />
+      <div class="logo">
+        <img src="logo-canaris.png" alt="Canaris">
+      </div>
       <div class="title">ASSISTENTE CANARIS</div>
     </div>
 
     <div class="card">
+      <div class="screen">
 
-      <!-- SCHERMATA 1: HOME (TAB + A/B/C) -->
-      <div id="screenHome" class="screen">
+        <!-- MODALITÀ -->
         <div class="tabs">
-          <button class="tab active" id="tabPhoto">
-            FOTO
-            <small>SCATTA/CARICA</small>
-          </button>
-          <button class="tab" id="tabCode">
-            CODICE
-            <small>INSERISCI SKU</small>
-          </button>
-          <button class="tab" id="tabFilters">
-            FILTRI
-            <small>TAG RAPIDI</small>
-          </button>
+          <div class="tab active">FOTO<br><small>SCATTA / CARICA</small></div>
+          <div class="tab">CODICE<br><small>INSERISCI SKU</small></div>
+          <div class="tab">FILTRI<br><small>TAG RAPIDI</small></div>
         </div>
 
-        <!-- PANEL A: FOTO -->
-        <div id="panelPhoto">
-          <div class="hero">
-            <div class="camIcon">📷</div>
-            <div>
-              <h1>TROVA ABITI SIMILI</h1>
-              <p class="sub">SCATTA UNA FOTO DELL’ABITO (APPESO, MANICHINO O INDOSSATO). POI TI MOSTRA I PIÙ SIMILI DISPONIBILI.</p>
-              <div class="hint">TIP: INQUADRA L’ABITO INTERO, SENZA SFONDI TROPPO CAOTICI.</div>
-            </div>
+        <!-- HERO -->
+        <div class="hero">
+          <div class="camIcon">📷</div>
 
-            <div class="actions">
-              <button class="primary" id="btnTakePhoto">📸 SCATTA FOTO</button>
-              <button class="secondary" id="btnUpload">📁 CARICA DALLA GALLERIA</button>
-            </div>
+          <h1>TROVA ABITI SIMILI</h1>
+          <p class="sub">
+            SCATTA UNA FOTO DELL’ABITO (APPESO, MANICHINO O INDOSSATO).
+            TI MOSTRERÀ LE MIGLIORI ALTERNATIVE DISPONIBILI IN ATELIER.
+          </p>
+
+          <div class="actions">
+            <button class="primary">📸 SCATTA FOTO</button>
+            <button class="secondary">📁 CARICA DALLA GALLERIA</button>
           </div>
         </div>
 
-        <!-- PANEL B: CODICE -->
-        <div id="panelCode" class="hidden">
-          <div class="form">
-            <div>
-              <h1 style="font-size:20px;margin:0;">CERCA DA CODICE</h1>
-              <p class="sub" style="max-width:420px;margin-top:8px;">
-                SE NON VUOI FARE LA FOTO, INSERISCI IL CODICE/ARTICOLO (SKU) E TI PROPONE ABITI SIMILI.
-              </p>
-            </div>
-
-            <div class="field">
-              <label>CODICE ABITO (SKU)</label>
-              <input id="skuInput" type="text" placeholder="ES: T00251" />
-              <div class="note">IL CODICE LO PRENDI DA ETICHETTA O DA SHOPIFY.</div>
-            </div>
-
-            <div class="actions">
-              <button class="primary" id="btnSearchBySku">🔎 CERCA ABITI SIMILI</button>
-              <button class="secondary" id="btnSkuToPhoto">📷 PASSA A FOTO</button>
-            </div>
-          </div>
+        <div class="status">
+          STATO: PRONTA (DEMO — POI COLLEGHIAMO SHOPIFY + STYLE.AI)
         </div>
 
-        <!-- PANEL C: FILTRI -->
-        <div id="panelFilters" class="hidden">
-          <div class="form">
-            <div>
-              <h1 style="font-size:20px;margin:0;">CERCA CON FILTRI</h1>
-              <p class="sub" style="max-width:420px;margin-top:8px;">
-                USA I TAG FONDAMENTALI: LINEA, LUNGHEZZA, SCOLLO. (DEMO ORA — POI COLLEGIAMO SHOPIFY)
-              </p>
-            </div>
-
-            <div class="field">
-              <label>LINEA</label>
-              <select id="fLinea">
-                <option value="">— SELEZIONA —</option>
-                <option>MORBIDO</option>
-                <option>SCIVOLATO</option>
-                <option>SIRENA</option>
-                <option>AMPIO</option>
-                <option>TUBO</option>
-                <option>CORTOAVANTI LUNGO DIETRO</option>
-              </select>
-            </div>
-
-            <div class="two">
-              <div class="field">
-                <label>LUNGHEZZA</label>
-                <select id="fLunghezza">
-                  <option value="">— SELEZIONA —</option>
-                  <option>ABITI CORTI</option>
-                  <option>ABITI LUNGHI</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>COLORE</label>
-                <input id="fColore" type="text" placeholder="ES: BLU, CIPRIA..." />
-              </div>
-            </div>
-
-            <div class="field">
-              <label>SCOLLO</label>
-              <select id="fScollo">
-                <option value="">— SELEZIONA —</option>
-                <option>A V</option>
-                <option>OMERALE</option>
-                <option>BRETELLA LARGA</option>
-                <option>CUORE</option>
-                <option>FASCIA</option>
-              </select>
-            </div>
-
-            <div class="actions">
-              <button class="primary" id="btnSearchByFilters">🔎 TROVA ABITI</button>
-              <button class="secondary" id="btnFiltersToPhoto">📷 PASSA A FOTO</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SCHERMATA 2: ANTEPRIMA FOTO -->
-      <div id="screenPreview" class="screen hidden">
-        <div class="previewWrap">
-          <h1 style="font-size:18px;margin:0;">CONFERMA FOTO</h1>
-          <img id="previewImg" class="previewImg" alt="ANTEPRIMA FOTO" />
-          <div class="row">
-            <button class="primary" id="btnUsePhoto">✅ USA QUESTA FOTO</button>
-            <button class="secondary" id="btnRetake">🔁 RIFAI</button>
-          </div>
-          <button class="danger" id="btnCancel">ANNULLA</button>
-        </div>
-      </div>
-
-      <!-- SCHERMATA 3: RISULTATI (DUMMY PER ORA) -->
-      <div id="screenResults" class="screen hidden">
-        <div class="resultsHeader">
-          <div>
-            <h1 style="font-size:18px;margin:0;">ABITI SIMILI</h1>
-            <div class="line" id="resultsSubtitle">RISULTATI (DEMO)</div>
-          </div>
-          <div class="badge">TOP 3–5</div>
-        </div>
-
-        <div class="grid" id="resultsList"></div>
-
-        <div class="foot">
-          <button class="secondary" id="btnBackHome">⬅️ HOME</button>
-          <button class="primary" id="btnDone">FATTO</button>
-        </div>
-      </div>
-
-      <div class="status" id="statusLine">
-        STATO: PRONTA. (DEMO — POI COLLEGHIAMO STYLE.AI + SHOPIFY)
       </div>
     </div>
 
-    <!-- INPUT NASCOSTI -->
-    <input id="inputCamera" type="file" accept="image/*" capture="environment" class="hidden" />
-    <input id="inputGallery" type="file" accept="image/*" class="hidden" />
   </div>
-
-<script>
-  // SCHERMATE
-  const screenHome = document.getElementById('screenHome');
-  const screenPreview = document.getElementById('screenPreview');
-  const screenResults = document.getElementById('screenResults');
-  const statusLine = document.getElementById('statusLine');
-  const resultsSubtitle = document.getElementById('resultsSubtitle');
-
-  // TAB
-  const tabPhoto = document.getElementById('tabPhoto');
-  const tabCode = document.getElementById('tabCode');
-  const tabFilters = document.getElementById('tabFilters');
-
-  const panelPhoto = document.getElementById('panelPhoto');
-  const panelCode = document.getElementById('panelCode');
-  const panelFilters = document.getElementById('panelFilters');
-
-  // FOTO
-  const btnTakePhoto = document.getElementById('btnTakePhoto');
-  const btnUpload = document.getElementById('btnUpload');
-  const inputCamera = document.getElementById('inputCamera');
-  const inputGallery = document.getElementById('inputGallery');
-
-  // PREVIEW
-  const previewImg = document.getElementById('previewImg');
-  const btnUsePhoto = document.getElementById('btnUsePhoto');
-  const btnRetake = document.getElementById('btnRetake');
-  const btnCancel = document.getElementById('btnCancel');
-
-  // CODICE
-  const skuInput = document.getElementById('skuInput');
-  const btnSearchBySku = document.getElementById('btnSearchBySku');
-  const btnSkuToPhoto = document.getElementById('btnSkuToPhoto');
-
-  // FILTRI
-  const fLinea = document.getElementById('fLinea');
-  const fLunghezza = document.getElementById('fLunghezza');
-  const fColore = document.getElementById('fColore');
-  const fScollo = document.getElementById('fScollo');
-  const btnSearchByFilters = document.getElementById('btnSearchByFilters');
-  const btnFiltersToPhoto = document.getElementById('btnFiltersToPhoto');
-
-  // RISULTATI
-  const resultsList = document.getElementById('resultsList');
-  const btnBackHome = document.getElementById('btnBackHome');
-  const btnDone = document.getElementById('btnDone');
-
-  let currentBlobUrl = null;
-  let currentFile = null;
-
-  function show(screen){
-    [screenHome, screenPreview, screenResults].forEach(s => s.classList.add('hidden'));
-    screen.classList.remove('hidden');
-  }
-  function setStatus(txt){ statusLine.textContent = "STATO: " + txt; }
-
-  // TAB UI
-  function setActiveTab(which){
-    [tabPhoto, tabCode, tabFilters].forEach(t => t.classList.remove('active'));
-    [panelPhoto, panelCode, panelFilters].forEach(p => p.classList.add('hidden'));
-
-    if(which === 'photo'){
-      tabPhoto.classList.add('active');
-      panelPhoto.classList.remove('hidden');
-    }
-    if(which === 'code'){
-      tabCode.classList.add('active');
-      panelCode.classList.remove('hidden');
-    }
-    if(which === 'filters'){
-      tabFilters.classList.add('active');
-      panelFilters.classList.remove('hidden');
-    }
-  }
-
-  tabPhoto.addEventListener('click', () => setActiveTab('photo'));
-  tabCode.addEventListener('click', () => setActiveTab('code'));
-  tabFilters.addEventListener('click', () => setActiveTab('filters'));
-
-  // FOTO FLOW
-  function handleFile(file){
-    if(!file) return;
-    currentFile = file;
-    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-    currentBlobUrl = URL.createObjectURL(file);
-    previewImg.src = currentBlobUrl;
-    show(screenPreview);
-    setStatus("FOTO CARICATA. CONFERMA O RIFAI.");
-  }
-
-  btnTakePhoto.addEventListener('click', () => {
-    inputCamera.value = "";
-    inputCamera.click();
-  });
-
-  btnUpload.addEventListener('click', () => {
-    inputGallery.value = "";
-    inputGallery.click();
-  });
-
-  inputCamera.addEventListener('change', e => handleFile(e.target.files[0]));
-  inputGallery.addEventListener('change', e => handleFile(e.target.files[0]));
-
-  btnRetake.addEventListener('click', () => {
-    show(screenHome);
-    setActiveTab('photo');
-    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
-  });
-
-  btnCancel.addEventListener('click', () => {
-    currentFile = null;
-    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-    currentBlobUrl = null;
-    show(screenHome);
-    setActiveTab('photo');
-    setStatus("PRONTA.");
-  });
-
-  // DEMO RISULTATI
-  function renderDemoResults(){
-    const demo = [
-      {name:"ABITO LUNGO CON SPACCO", info:"COLORE SIMILE • LINEA SIMILE", sizes:["42","44 DISP.","46"], okIndex:1},
-      {name:"ABITO SCIVOLATO ELEGANTE", info:"DETTAGLIO SIMILE • TONO SIMILE", sizes:["40","42 DISP.","44"], okIndex:1},
-      {name:"ABITO STRUTTURATO", info:"ALTERNATIVA VICINA • MODELLO AFFINE", sizes:["44 DISP.","46"], okIndex:0},
-      {name:"ABITO MONOSPALLA", info:"VARIANTE STILE • COLORE VICINO", sizes:["42","44 DISP."], okIndex:1},
-      {name:"ABITO CON SCHIENA APERTA", info:"DETTAGLIO FORTE • LINEA SIMILE", sizes:["44 DISP.","48"], okIndex:0},
-    ];
-
-    resultsList.innerHTML = "";
-    demo.slice(0,5).forEach((p, idx) => {
-      const div = document.createElement('div');
-      div.className = "item";
-      div.innerHTML = `
-        <div class="thumb">FOTO</div>
-        <div class="meta">
-          <div class="name">${idx+1}. ${p.name}</div>
-          <div class="line">${p.info}</div>
-          <div class="stock">
-            ${p.sizes.map((s,i)=> `<span class="pill ${i===p.okIndex?'ok':''}">${s}</span>`).join('')}
-          </div>
-        </div>
-      `;
-      resultsList.appendChild(div);
-    });
-  }
-
-  async function goResults(subtitle){
-    show(screenResults);
-    resultsSubtitle.textContent = subtitle || "RISULTATI (DEMO)";
-    setStatus("ELABORAZIONE... (DEMO)");
-    resultsList.innerHTML = "";
-    await new Promise(r => setTimeout(r, 900));
-    renderDemoResults();
-    setStatus("RISULTATI PRONTI. (DEMO) POI QUI ARRIVANO I DATI REALI DA SHOPIFY.");
-  }
-
-  // FOTO → RISULTATI
-  btnUsePhoto.addEventListener('click', async () => {
-    if(!currentFile) return;
-    await goResults("RISULTATI DA FOTO (DEMO)");
-  });
-
-  // CODICE → RISULTATI
-  btnSearchBySku.addEventListener('click', async () => {
-    const sku = (skuInput.value || "").trim().toUpperCase();
-    if(!sku){
-      alert("INSERISCI UN CODICE (ES: T00251).");
-      return;
-    }
-    await goResults("RISULTATI DA CODICE: " + sku + " (DEMO)");
-  });
-
-  btnSkuToPhoto.addEventListener('click', () => {
-    setActiveTab('photo');
-  });
-
-  // FILTRI → RISULTATI
-  btnSearchByFilters.addEventListener('click', async () => {
-    const linea = fLinea.value || "—";
-    const lung = fLunghezza.value || "—";
-    const col = (fColore.value || "").trim().toUpperCase() || "—";
-    const scollo = fScollo.value || "—";
-
-    await goResults(`FILTRI (DEMO): LINEA ${linea} • ${lung} • COLORE ${col} • SCOLLO ${scollo}`);
-  });
-
-  btnFiltersToPhoto.addEventListener('click', () => {
-    setActiveTab('photo');
-  });
-
-  // RISULTATI → HOME
-  btnBackHome.addEventListener('click', () => {
-    show(screenHome);
-    setActiveTab('photo');
-    setStatus("PRONTA.");
-  });
-
-  btnDone.addEventListener('click', () => {
-    show(screenHome);
-    setActiveTab('photo');
-    setStatus("PRONTA.");
-  });
-
-  // AVVIO
-  show(screenHome);
-  setActiveTab('photo');
-</script>
-
 </body>
 </html>
