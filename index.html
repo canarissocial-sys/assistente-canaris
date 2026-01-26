@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>ASSISTENTE CANARIS</title>
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#141414;
+      --text:#f2f2f2;
+      --muted:#b8b8b8;
+      --accent:#22c55e;
+      --danger:#ef4444;
+      --border:#2a2a2a;
+      --radius:18px;
+      --pad:16px;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    body{
+      margin:0;
+      background:linear-gradient(180deg, #050505, #0b0b0b);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+    }
+    .app{
+      width: min(520px, 100%);
+      padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
+    }
+    .topbar{
+      padding: 14px var(--pad);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, #2a2a2a, #0f0f0f);
+      border:1px solid var(--border);
+      display:grid;place-items:center;
+      box-shadow: var(--shadow);
+      font-weight:700;
+    }
+    .title{
+      font-size:14px;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+    .card{
+      margin: 10px var(--pad) 0 var(--pad);
+      background: rgba(20,20,20,.85);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .screen{
+      padding: 18px;
+    }
+    .hero{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      min-height: 56vh;
+      text-align:center;
+    }
+    .camIcon{
+      width:78px;height:78px;border-radius:22px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, #1d1d1d, #101010);
+      display:grid;place-items:center;
+      font-size:32px;
+    }
+    h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.35;
+      max-width: 320px;
+    }
+    .hint{
+      margin-top:8px;
+      color:#9ca3af;
+      font-size:12px;
+    }
+    .actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      width:100%;
+      margin-top:14px;
+    }
+    button{
+      border:0;
+      border-radius:16px;
+      padding:14px 14px;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+    }
+    .primary{
+      background: var(--accent);
+      color:#06120a;
+    }
+    .secondary{
+      background: transparent;
+      color: var(--text);
+      border:1px solid var(--border);
+    }
+    .danger{
+      background: transparent;
+      color: var(--danger);
+      border:1px solid rgba(239,68,68,.35);
+    }
+    .previewWrap{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .previewImg{
+      width:100%;
+      border-radius: 16px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      max-height: 55vh;
+      object-fit: contain;
+    }
+    .row{
+      display:flex;
+      gap:10px;
+    }
+    .row button{ flex:1; }
+    .status{
+      padding: 14px 18px;
+      border-top:1px solid var(--border);
+      color: var(--muted);
+      font-size:13px;
+    }
+
+    /* RISULTATI */
+    .resultsHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .badge{
+      font-size:12px;
+      color:#0b0b0b;
+      background:#f2f2f2;
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:800;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .item{
+      display:flex;
+      gap:12px;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(10,10,10,.45);
+    }
+    .thumb{
+      width:74px;height:96px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, #1b1b1b, #0e0e0e);
+      display:grid;place-items:center;
+      color:#9ca3af;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+    .meta{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+    .name{
+      font-weight:800;
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .line{
+      color:var(--muted);
+      font-size:13px;
+    }
+    .stock{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+    .pill{
+      font-size:12px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:#d1d5db;
+      background: rgba(255,255,255,.03);
+    }
+    .pill.ok{
+      border-color: rgba(34,197,94,.4);
+      color:#bbf7d0;
+    }
+    .foot{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .foot button{ flex:1; }
+    .hidden{ display:none; }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="logo">C</div>
+      <div class="title">ASSISTENTE CANARIS</div>
+    </div>
+
+    <div class="card">
+      <!-- SCHERMATA 1 -->
+      <div id="screenCapture" class="screen">
+        <div class="hero">
+          <div class="camIcon">📷</div>
+          <div>
+            <h1>SCATTA UNA FOTO DELL’ABITO</h1>
+            <p class="sub">ABITO APPESO, MANICHINO O INDOSSATO. UNA SOLA FOTO È SUFFICIENTE.</p>
+            <div class="hint">TIP: INQUADRA L’ABITO INTERO, SENZA SFONDI TROPPO CAOTICI.</div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="btnTakePhoto">📸 SCATTA FOTO</button>
+            <button class="secondary" id="btnUpload">📁 CARICA DALLA GALLERIA</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHERMATA 2: ANTEPRIMA -->
+      <div id="screenPreview" class="screen hidden">
+        <div class="previewWrap">
+          <h1 style="font-size:18px;margin:0;">CONFERMA FOTO</h1>
+          <img id="previewImg" class="previewImg" alt="ANTEPRIMA FOTO" />
+          <div class="row">
+            <button class="primary" id="btnUsePhoto">✅ USA QUESTA FOTO</button>
+            <button class="secondary" id="btnRetake">🔁 RIFAI</button>
+          </div>
+          <button class="danger" id="btnCancel">ANNULLA</button>
+        </div>
+      </div>
+
+      <!-- SCHERMATA 3: RISULTATI (DUMMY) -->
+      <div id="screenResults" class="screen hidden">
+        <div class="resultsHeader">
+          <div>
+            <h1 style="font-size:18px;margin:0;">ABITI SIMILI</h1>
+            <div class="line">RISULTATI FILTRATI PER TAGLIA DISPONIBILE (DEMO)</div>
+          </div>
+          <div class="badge">3–5 TOP</div>
+        </div>
+
+        <div class="grid" id="resultsList"></div>
+
+        <div class="foot">
+          <button class="secondary" id="btnNewPhoto">📷 NUOVA FOTO</button>
+          <button class="primary" id="btnDone">FATTO</button>
+        </div>
+      </div>
+
+      <div class="status" id="statusLine">
+        STATO: PRONTA. (QUESTA È UNA DEMO — POI LA COLLEGHIAMO A STYLE.AI + SHOPIFY)
+      </div>
+    </div>
+
+    <!-- INPUT NASCOSTI -->
+    <input id="inputCamera" type="file" accept="image/*" capture="environment" class="hidden" />
+    <input id="inputGallery" type="file" accept="image/*" class="hidden" />
+
+  </div>
+
+<script>
+  const screenCapture = document.getElementById('screenCapture');
+  const screenPreview = document.getElementById('screenPreview');
+  const screenResults = document.getElementById('screenResults');
+  const statusLine = document.getElementById('statusLine');
+
+  const btnTakePhoto = document.getElementById('btnTakePhoto');
+  const btnUpload = document.getElementById('btnUpload');
+  const inputCamera = document.getElementById('inputCamera');
+  const inputGallery = document.getElementById('inputGallery');
+
+  const previewImg = document.getElementById('previewImg');
+  const btnUsePhoto = document.getElementById('btnUsePhoto');
+  const btnRetake = document.getElementById('btnRetake');
+  const btnCancel = document.getElementById('btnCancel');
+
+  const resultsList = document.getElementById('resultsList');
+  const btnNewPhoto = document.getElementById('btnNewPhoto');
+  const btnDone = document.getElementById('btnDone');
+
+  let currentBlobUrl = null;
+  let currentFile = null;
+
+  function show(screen){
+    [screenCapture, screenPreview, screenResults].forEach(s => s.classList.add('hidden'));
+    screen.classList.remove('hidden');
+  }
+
+  function setStatus(txt){ statusLine.textContent = "STATO: " + txt; }
+
+  function handleFile(file){
+    if(!file) return;
+    currentFile = file;
+    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+    currentBlobUrl = URL.createObjectURL(file);
+    previewImg.src = currentBlobUrl;
+    show(screenPreview);
+    setStatus("FOTO CARICATA. CONFERMA O RIFAI.");
+  }
+
+  btnTakePhoto.addEventListener('click', () => {
+    inputCamera.value = "";
+    inputCamera.click();
+  });
+
+  btnUpload.addEventListener('click', () => {
+    inputGallery.value = "";
+    inputGallery.click();
+  });
+
+  inputCamera.addEventListener('change', e => handleFile(e.target.files[0]));
+  inputGallery.addEventListener('change', e => handleFile(e.target.files[0]));
+
+  btnRetake.addEventListener('click', () => {
+    show(screenCapture);
+    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
+  });
+
+  btnCancel.addEventListener('click', () => {
+    currentFile = null;
+    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+    currentBlobUrl = null;
+    show(screenCapture);
+    setStatus("PRONTA.");
+  });
+
+  // DEMO RISULTATI (POI QUI CI VA STYLE.AI + SHOPIFY)
+  function renderDemoResults(){
+    const demo = [
+      {name:"ABITO LUNGO CON SPACCO", info:"COLORE SIMILE • LINEA SIMILE", sizes:["42","44 DISP.","46"], okIndex:1},
+      {name:"ABITO SCIVOLATO ELEGANTE", info:"DETTAGLIO SIMILE • TONO SIMILE", sizes:["40","42 DISP.","44"], okIndex:1},
+      {name:"ABITO STRUTTURATO", info:"ALTERNATIVA VICINA • MODELLO AFFINE", sizes:["44 DISP.","46"], okIndex:0},
+      {name:"ABITO MONOSPALLA", info:"VARIANTE STILE • COLORE VICINO", sizes:["42","44 DISP."], okIndex:1},
+      {name:"ABITO CON SCHIENA APERTA", info:"DETTAGLIO FORTE • LINEA SIMILE", sizes:["44 DISP.","48"], okIndex:0},
+    ];
+
+    resultsList.innerHTML = "";
+    demo.slice(0,5).forEach((p, idx) => {
+      const div = document.createElement('div');
+      div.className = "item";
+      div.innerHTML = `
+        <div class="thumb">FOTO</div>
+        <div class="meta">
+          <div class="name">${idx+1}. ${p.name}</div>
+          <div class="line">${p.info}</div>
+          <div class="stock">
+            ${p.sizes.map((s,i)=> `<span class="pill ${i===p.okIndex?'ok':''}">${s}</span>`).join('')}
+          </div>
+        </div>
+      `;
+      resultsList.appendChild(div);
+    });
+  }
+
+  btnUsePhoto.addEventListener('click', async () => {
+    if(!currentFile) return;
+
+    show(screenResults);
+    setStatus("ELABORAZIONE... (DEMO)");
+    resultsList.innerHTML = "";
+    // SIMULA 1.2s DI “AI”
+    await new Promise(r => setTimeout(r, 1200));
+    renderDemoResults();
+    setStatus("RISULTATI PRONTI. (DEMO) POI QUI ARRIVERANNO I DATI REALI DA SHOPIFY.");
+  });
+
+  btnNewPhoto.addEventListener('click', () => {
+    show(screenCapture);
+    setStatus("PRONTA. SCATTA UNA NUOVA FOTO.");
+  });
+
+  btnDone.addEventListener('click', () => {
+    show(screenCapture);
+    setStatus("PRONTA.");
+  });
+
+  // AVVIO
+  show(screenCapture);
+</script>
+</body>
+</html>
