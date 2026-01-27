@@ -3,28 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>ASSISTENTE CANARIS</title>
+  <title>Assistente Canaris</title>
 
   <style>
     :root{
       --bg:#0b0b0b;
-      --bg2:#050505;
       --card:#141414;
       --text:#f2f2f2;
       --muted:#9ca3af;
-      --muted2:#b8b8b8;
       --accent:#22c55e;
       --danger:#ef4444;
       --border:#2a2a2a;
       --radius:18px;
       --shadow:0 10px 25px rgba(0,0,0,.35);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
 
-    *{ box-sizing:border-box; }
     body{
       margin:0;
-      background:linear-gradient(180deg,var(--bg2),var(--bg));
+      background:linear-gradient(180deg,#050505,#0b0b0b);
       color:var(--text);
       min-height:100vh;
       display:flex;
@@ -32,7 +29,7 @@
     }
 
     .app{
-      width:min(560px,100%);
+      width:min(640px,100%);
       padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);
     }
 
@@ -44,32 +41,14 @@
       padding:14px 10px;
     }
     .logo{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      overflow:hidden;
-      border:1px solid var(--border);
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: var(--shadow);
-      flex:0 0 auto;
+      width:42px;height:42px;border-radius:50%;
+      overflow:hidden;border:1px solid var(--border);
+      background:#fff;flex:0 0 auto;
     }
-    .logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+    .logo img{width:100%;height:100%;object-fit:contain}
     .title{
-      font-size:14px;
-      letter-spacing:.18em;
-      color:var(--muted);
-      text-transform:uppercase;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-size:14px;letter-spacing:.18em;
+      color:var(--muted);text-transform:uppercase;
     }
 
     .card{
@@ -78,780 +57,219 @@
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       overflow:hidden;
-      backdrop-filter: blur(6px);
     }
 
-    .screen{ padding:22px 18px; }
+    .screen{padding:22px 18px}
 
     /* TABS */
-    .tabs{
-      display:flex;
-      gap:10px;
-      margin-bottom:18px;
-    }
-    .tabBtn{
-      flex:1;
-      padding:14px 12px;
-      border-radius:14px;
+    .tabs{display:flex;gap:10px;margin-bottom:18px}
+    .tab{
+      flex:1;padding:14px;border-radius:14px;
       border:1px solid var(--border);
-      background:#0f0f0f;
-      color:var(--muted);
-      font-weight:800;
-      font-size:14px;
-      cursor:pointer;
-      text-align:center;
-      line-height:1.1;
-      user-select:none;
+      background:#0f0f0f;color:var(--muted);
+      font-weight:800;font-size:14px;
+      text-align:center;cursor:pointer;
     }
-    .tabBtn small{
-      display:block;
-      margin-top:6px;
-      font-size:12px;
-      letter-spacing:.06em;
-      color:#6b7280;
-      font-weight:800;
-    }
-    .tabBtn.active{
+    .tab small{display:block;font-size:12px;margin-top:2px}
+    .tab.active{
       border-color:var(--accent);
       color:var(--accent);
-      box-shadow:0 0 0 1px rgba(34,197,94,.4);
+      box-shadow:0 0 0 1px rgba(34,197,94,.35);
     }
+
+    .hidden{display:none!important}
 
     /* HERO */
     .hero{
       text-align:center;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:14px;
+      display:flex;flex-direction:column;
+      align-items:center;gap:14px;
     }
     .iconBox{
-      width:80px;
-      height:80px;
-      border-radius:24px;
+      width:80px;height:80px;border-radius:24px;
       border:1px solid var(--border);
       background:linear-gradient(180deg,#1d1d1d,#101010);
-      display:grid;
-      place-items:center;
-      font-size:34px;
+      display:grid;place-items:center;font-size:34px;
     }
-
-    h1{
-      margin:0;
-      font-size:22px;
-      letter-spacing:.02em;
-    }
+    h1{margin:0;font-size:22px;text-transform:uppercase}
     .sub{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.4;
-      max-width:360px;
-      margin:0;
-    }
-    .hint{
-      color:#7c8593;
-      font-size:12px;
-      letter-spacing:.04em;
-      margin-top:2px;
-    }
-
-    .actions{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      width:100%;
-      margin-top:10px;
-    }
-
-    button, input, select{
-      font-family: inherit;
-    }
-
-    .btn{
-      border:0;
-      border-radius:16px;
-      padding:16px;
-      font-weight:900;
-      font-size:15px;
-      cursor:pointer;
+      color:var(--muted);font-size:14px;
+      line-height:1.45;max-width:420px;
       text-transform:uppercase;
-      letter-spacing:.02em;
-    }
-    .btn.primary{
-      background:var(--accent);
-      color:#06230f;
-    }
-    .btn.secondary{
-      background:transparent;
-      color:var(--text);
-      border:1px solid var(--border);
-    }
-    .btn.danger{
-      background:transparent;
-      color:var(--danger);
-      border:1px solid rgba(239,68,68,.35);
     }
 
-    .status{
-      margin-top:16px;
-      padding:14px;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:13px;
-      text-align:center;
-    }
-
-    .hidden{ display:none !important; }
-
-    /* PREVIEW */
-    .previewWrap{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .previewImg{
-      width:100%;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:#0f0f0f;
-      max-height:52vh;
-      object-fit:contain;
-    }
-    .row{
-      display:flex;
-      gap:10px;
-      width:100%;
-    }
-    .row .btn{ flex:1; }
-
-    /* INPUTS */
-    .field{
-      width:100%;
-      margin-top:4px;
-    }
-    .label{
-      text-align:left;
-      width:100%;
-      font-weight:900;
-      letter-spacing:.08em;
-      color:var(--muted2);
-      font-size:12px;
+    button{
+      border:0;border-radius:16px;
+      padding:16px;font-weight:900;
+      font-size:15px;cursor:pointer;
       text-transform:uppercase;
-      margin:10px 0 8px;
     }
-    .textInput{
-      width:100%;
-      padding:14px 14px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:#0f0f0f;
-      color:var(--text);
-      outline:none;
-      font-weight:800;
-      letter-spacing:.02em;
-    }
-    .textInput::placeholder{ color:#6b7280; }
+    .primary{background:var(--accent);color:#06230f}
+    .secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .danger{background:transparent;color:var(--danger);border:1px solid rgba(239,68,68,.35)}
 
-    /* FILTERS */
-    .filtersIntro{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.4;
-      margin:0 0 14px;
+    .actions{display:flex;flex-direction:column;gap:12px;width:100%;margin-top:18px}
+
+    /* INPUT */
+    input[type=text]{
+      width:100%;padding:16px;border-radius:16px;
+      border:1px solid var(--border);
+      background:#0f0f0f;color:var(--text);
+      font-size:15px;text-transform:uppercase;
     }
+
+    /* PILLS */
     .sectionTitle{
-      margin:14px 0 10px;
-      font-weight:1000;
-      letter-spacing:.1em;
-      color:var(--muted2);
-      font-size:12px;
-      text-transform:uppercase;
+      margin:18px 0 10px;color:var(--muted);
+      font-weight:900;font-size:12px;text-transform:uppercase;
     }
-    .pillGrid{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .pillBtn{
+    .pills{display:flex;flex-wrap:wrap;gap:10px}
+    .pill{
+      padding:10px 12px;border-radius:999px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,.02);
-      color:#d1d5db;
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:12px;
-      letter-spacing:.02em;
+      background:rgba(255,255,255,.03);
+      color:#e5e7eb;font-weight:900;
+      font-size:13px;text-transform:uppercase;
       cursor:pointer;
-      text-transform:uppercase;
     }
-    .pillBtn.active{
-      border-color:rgba(34,197,94,.7);
-      box-shadow:0 0 0 1px rgba(34,197,94,.25);
+    .pill.active{
+      border-color:rgba(34,197,94,.6);
       color:#bbf7d0;
-    }
-    .noteSmall{
-      margin-top:10px;
-      color:#7c8593;
-      font-size:12px;
-      text-align:center;
+      box-shadow:0 0 0 1px rgba(34,197,94,.25);
     }
 
     /* RESULTS */
-    .resultsHeader{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-    }
-    .badge{
-      font-size:12px;
-      color:#0b0b0b;
-      background:#f2f2f2;
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:1000;
-      white-space:nowrap;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-    }
     .item{
-      display:flex;
-      gap:12px;
-      padding:12px;
+      display:flex;gap:12px;padding:12px;
       border:1px solid var(--border);
-      border-radius:16px;
-      background: rgba(10,10,10,.45);
+      border-radius:16px;background:rgba(10,10,10,.45);
+      margin-bottom:10px;
     }
     .thumb{
-      width:74px;height:96px;
-      border-radius:14px;
+      width:78px;height:104px;border-radius:14px;
       border:1px solid var(--border);
-      background: linear-gradient(180deg, #1b1b1b, #0e0e0e);
-      display:grid;place-items:center;
-      color:#9ca3af;
-      font-size:12px;
-      flex:0 0 auto;
-      overflow:hidden;
+      background:#111;overflow:hidden;
     }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      opacity:.95;
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .meta{flex:1}
+    .name{font-weight:900;font-size:14px;text-transform:uppercase}
+    .line{font-size:13px;color:var(--muted);margin-top:4px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .tag{
+      font-size:12px;padding:5px 8px;border-radius:999px;
+      border:1px solid var(--border);color:#d1d5db;
     }
-    .meta{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-width:0;
-    }
-    .name{
-      font-weight:1000;
-      font-size:14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      text-transform:uppercase;
-    }
-    .line{
-      color:var(--muted);
-      font-size:13px;
-    }
-    .stock{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:4px;
-    }
-    .pill{
-      font-size:12px;
-      padding:5px 8px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      color:#d1d5db;
-      background: rgba(255,255,255,.03);
-      font-weight:900;
-      text-transform:uppercase;
-    }
-    .pill.ok{
-      border-color: rgba(34,197,94,.4);
-      color:#bbf7d0;
-    }
+    .tag.ok{border-color:rgba(34,197,94,.5);color:#bbf7d0}
 
-    .foot{
-      display:flex;
-      gap:10px;
-      margin-top:12px;
-    }
-    .foot .btn{ flex:1; }
-
-    /* small polish on wide screens */
-    @media (min-width: 860px){
-      .app{ padding-top:26px; }
-      .card{ max-width:520px; margin:0 auto; }
+    .status{
+      margin-top:16px;padding:14px;
+      border-top:1px solid var(--border);
+      color:var(--muted);font-size:13px;
+      text-align:center;text-transform:uppercase;
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
+<div class="app">
 
-    <!-- TOP -->
-    <div class="topbar">
-      <!-- IMPORTANT: nel repo deve esserci "logo.png" (come da tuo screenshot) -->
-      <div class="logo">
-        <img src="logo.png" alt="Canaris">
-      </div>
-      <div class="title">ASSISTENTE CANARIS</div>
-    </div>
-
-    <div class="card">
-      <div class="screen">
-
-        <!-- TAB BAR -->
-        <div class="tabs" role="tablist" aria-label="Modalità">
-          <div class="tabBtn active" id="tabFoto" data-tab="foto">FOTO<small>SCATTA / CARICA</small></div>
-          <div class="tabBtn" id="tabCodice" data-tab="codice">CODICE<small>INSERISCI SKU</small></div>
-          <div class="tabBtn" id="tabFiltri" data-tab="filtri">FILTRI<small>TAG RAPIDI</small></div>
-        </div>
-
-        <!-- FOTO: CAPTURE -->
-        <section id="panelFoto" class="panel">
-          <div id="screenCapture">
-            <div class="hero">
-              <div class="iconBox">📷</div>
-
-              <h1>TROVA ABITI SIMILI</h1>
-              <p class="sub">
-                SCATTA UNA FOTO DELL’ABITO (APPESO, MANICHINO O INDOSSATO).
-                POI TI MOSTRA I PIÙ SIMILI DISPONIBILI.
-              </p>
-              <div class="hint">TIP: INQUADRA L’ABITO INTERO, SENZA SFONDI TROPPO CAOTICI.</div>
-
-              <div class="actions">
-                <button class="btn primary" id="btnTakePhoto">📸 SCATTA FOTO</button>
-                <button class="btn secondary" id="btnUpload">📁 CARICA DALLA GALLERIA</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- FOTO: PREVIEW -->
-          <div id="screenPreview" class="hidden">
-            <div class="previewWrap">
-              <h1 style="font-size:18px;margin:0;text-transform:uppercase;">CONFERMA FOTO</h1>
-              <img id="previewImg" class="previewImg" alt="ANTEPRIMA FOTO" />
-              <div class="row">
-                <button class="btn primary" id="btnUsePhoto">✅ USA QUESTA FOTO</button>
-                <button class="btn secondary" id="btnRetake">🔁 RIFAI</button>
-              </div>
-              <button class="btn danger" id="btnCancel">ANNULLA</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- CODICE -->
-        <section id="panelCodice" class="panel hidden">
-          <div class="hero">
-            <div class="iconBox">🔎</div>
-            <h1>CERCA PER CODICE</h1>
-            <p class="sub">INSERISCI LO SKU/CODICE ARTICOLO. POI TI MOSTRA GLI ABITI SIMILI (DEMO).</p>
-
-            <div class="field" style="max-width:420px;">
-              <div class="label">CODICE / SKU</div>
-              <input class="textInput" id="skuInput" type="text" placeholder="ES. T00251" autocomplete="off" />
-            </div>
-
-            <div class="actions" style="max-width:420px;">
-              <button class="btn primary" id="btnSearchSku">CERCA SIMILI</button>
-              <button class="btn secondary" id="btnClearSku">PULISCI</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- FILTRI -->
-        <section id="panelFiltri" class="panel hidden">
-          <div class="hero" style="gap:10px;">
-            <div class="iconBox">🧩</div>
-            <h1>FILTRI RAPIDI</h1>
-            <p class="filtersIntro">
-              SELEZIONA 2–3 TAG (LINEA, LUNGHEZZA, SCOLLO).<br>
-              POI TI MOSTRA GLI ABITI SIMILI (DEMO).
-            </p>
-
-            <div class="field" style="width:100%; text-align:left;">
-              <div class="sectionTitle">LINEA</div>
-              <div class="pillGrid" id="lineaGroup">
-                <button class="pillBtn" data-group="linea" data-value="MORBIDO">MORBIDO</button>
-                <button class="pillBtn" data-group="linea" data-value="SCIVOLATO">SCIVOLATO</button>
-                <button class="pillBtn" data-group="linea" data-value="SIRENA">SIRENA</button>
-                <button class="pillBtn" data-group="linea" data-value="AMPIO">AMPIO</button>
-                <button class="pillBtn" data-group="linea" data-value="TUBO">TUBO</button>
-                <button class="pillBtn" data-group="linea" data-value="CORTOAVANTI LUNGO DIETRO">CORTOAVANTI LUNGO DIETRO</button>
-              </div>
-
-              <div class="sectionTitle">LUNGHEZZA</div>
-              <div class="pillGrid" id="lunghezzaGroup">
-                <button class="pillBtn" data-group="lunghezza" data-value="ABITI CORTI">ABITI CORTI</button>
-                <button class="pillBtn" data-group="lunghezza" data-value="ABITI LUNGHI">ABITI LUNGHI</button>
-              </div>
-
-              <div class="sectionTitle">SCOLLO</div>
-              <div class="pillGrid" id="scolloGroup">
-                <button class="pillBtn" data-group="scollo" data-value="A V">A V</button>
-                <button class="pillBtn" data-group="scollo" data-value="OMERALE">OMERALE</button>
-                <button class="pillBtn" data-group="scollo" data-value="BRETELLA LARGA">BRETELLA LARGA</button>
-                <button class="pillBtn" data-group="scollo" data-value="CUORE">CUORE</button>
-                <button class="pillBtn" data-group="scollo" data-value="FASCIA">FASCIA</button>
-              </div>
-
-              <div class="noteSmall" id="filtersNote">SELEZIONA ALMENO 2 TAG PER PROCEDERE.</div>
-
-              <div class="actions">
-                <button class="btn primary" id="btnSearchFilters">TROVA SIMILI</button>
-                <button class="btn secondary" id="btnResetFilters">RESET</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- RISULTATI (per tutte le modalità) -->
-        <section id="panelResults" class="panel hidden">
-          <div class="resultsHeader">
-            <div>
-              <h1 style="font-size:18px;margin:0;text-transform:uppercase;">ABITI SIMILI</h1>
-              <div class="line" id="resultsSubline">RISULTATI (DEMO)</div>
-            </div>
-            <div class="badge">3–5 TOP</div>
-          </div>
-
-          <div class="grid" id="resultsList"></div>
-
-          <div class="foot">
-            <button class="btn secondary" id="btnBack">INDIETRO</button>
-            <button class="btn primary" id="btnDone">FATTO</button>
-          </div>
-        </section>
-
-        <div class="status" id="statusLine">
-          STATO: PRONTA (DEMO — POI COLLEGHIAMO SHOPIFY + STYLE.AI)
-        </div>
-
-      </div>
-    </div>
-
-    <!-- INPUT NASCOSTI FOTO -->
-    <input id="inputCamera" type="file" accept="image/*" capture="environment" class="hidden" />
-    <input id="inputGallery" type="file" accept="image/*" class="hidden" />
-
+  <div class="topbar">
+    <div class="logo"><img src="logo.png" alt="Canaris"></div>
+    <div class="title">assistente canaris</div>
   </div>
 
-<script>
-  // PANELS
-  const panelFoto = document.getElementById('panelFoto');
-  const panelCodice = document.getElementById('panelCodice');
-  const panelFiltri = document.getElementById('panelFiltri');
-  const panelResults = document.getElementById('panelResults');
+  <div class="card">
+    <div class="screen">
 
-  // TABS
-  const tabFoto = document.getElementById('tabFoto');
-  const tabCodice = document.getElementById('tabCodice');
-  const tabFiltri = document.getElementById('tabFiltri');
+      <div class="tabs">
+        <div class="tab active" id="tabFoto">foto<small>scatta</small></div>
+        <div class="tab" id="tabCodice">codice<small>sku</small></div>
+        <div class="tab" id="tabFiltri">filtri<small>tag</small></div>
+      </div>
 
-  // STATUS
-  const statusLine = document.getElementById('statusLine');
+      <!-- FOTO -->
+      <div id="panelFoto">
+        <div class="hero">
+          <div class="iconBox">📷</div>
+          <h1>trova abiti simili</h1>
+          <p class="sub">modalità foto – verrà collegata all’ai</p>
+        </div>
+      </div>
 
-  // FOTO FLOW
-  const screenCapture = document.getElementById('screenCapture');
-  const screenPreview = document.getElementById('screenPreview');
-  const btnTakePhoto = document.getElementById('btnTakePhoto');
-  const btnUpload = document.getElementById('btnUpload');
-  const inputCamera = document.getElementById('inputCamera');
-  const inputGallery = document.getElementById('inputGallery');
-  const previewImg = document.getElementById('previewImg');
-  const btnUsePhoto = document.getElementById('btnUsePhoto');
-  const btnRetake = document.getElementById('btnRetake');
-  const btnCancel = document.getElementById('btnCancel');
-
-  // CODICE FLOW
-  const skuInput = document.getElementById('skuInput');
-  const btnSearchSku = document.getElementById('btnSearchSku');
-  const btnClearSku = document.getElementById('btnClearSku');
-
-  // FILTRI FLOW
-  const btnSearchFilters = document.getElementById('btnSearchFilters');
-  const btnResetFilters = document.getElementById('btnResetFilters');
-  const filtersNote = document.getElementById('filtersNote');
-
-  // RESULTS
-  const resultsList = document.getElementById('resultsList');
-  const resultsSubline = document.getElementById('resultsSubline');
-  const btnBack = document.getElementById('btnBack');
-  const btnDone = document.getElementById('btnDone');
-
-  // STATE
-  let currentBlobUrl = null;
-  let currentFile = null;
-  let lastMode = 'foto'; // foto | codice | filtri
-  let activePanelBeforeResults = 'foto';
-
-  const selected = { linea: null, lunghezza: null, scollo: null };
-
-  function setStatus(txt){
-    statusLine.textContent = "STATO: " + txt;
-  }
-
-  function setActiveTab(tab){
-    [tabFoto, tabCodice, tabFiltri].forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-  }
-
-  function showPanel(name){
-    [panelFoto, panelCodice, panelFiltri, panelResults].forEach(p => p.classList.add('hidden'));
-
-    if(name === 'foto') panelFoto.classList.remove('hidden');
-    if(name === 'codice') panelCodice.classList.remove('hidden');
-    if(name === 'filtri') panelFiltri.classList.remove('hidden');
-    if(name === 'results') panelResults.classList.remove('hidden');
-  }
-
-  function showFotoScreen(which){
-    // within FOTO panel: capture vs preview
-    screenCapture.classList.add('hidden');
-    screenPreview.classList.add('hidden');
-    if(which === 'capture') screenCapture.classList.remove('hidden');
-    if(which === 'preview') screenPreview.classList.remove('hidden');
-  }
-
-  function goToMode(mode){
-    lastMode = mode;
-    activePanelBeforeResults = mode;
-
-    if(mode === 'foto'){
-      setActiveTab(tabFoto);
-      showPanel('foto');
-      showFotoScreen('capture');
-      setStatus("PRONTA (MODALITÀ: FOTO)");
-    }
-    if(mode === 'codice'){
-      setActiveTab(tabCodice);
-      showPanel('codice');
-      setStatus("PRONTA (MODALITÀ: CODICE)");
-    }
-    if(mode === 'filtri'){
-      setActiveTab(tabFiltri);
-      showPanel('filtri');
-      setStatus("PRONTA (MODALITÀ: FILTRI)");
-      updateFiltersNote();
-    }
-  }
-
-  // TAB EVENTS
-  [tabFoto, tabCodice, tabFiltri].forEach(t => {
-    t.addEventListener('click', () => goToMode(t.dataset.tab));
-  });
-
-  // FOTO EVENTS
-  function handleFile(file){
-    if(!file) return;
-    currentFile = file;
-    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-    currentBlobUrl = URL.createObjectURL(file);
-    previewImg.src = currentBlobUrl;
-    showFotoScreen('preview');
-    setStatus("FOTO CARICATA. CONFERMA O RIFAI.");
-  }
-
-  btnTakePhoto.addEventListener('click', () => {
-    inputCamera.value = "";
-    inputCamera.click();
-  });
-
-  btnUpload.addEventListener('click', () => {
-    inputGallery.value = "";
-    inputGallery.click();
-  });
-
-  inputCamera.addEventListener('change', e => handleFile(e.target.files[0]));
-  inputGallery.addEventListener('change', e => handleFile(e.target.files[0]));
-
-  btnRetake.addEventListener('click', () => {
-    showFotoScreen('capture');
-    setStatus("PRONTA (MODALITÀ: FOTO)");
-  });
-
-  btnCancel.addEventListener('click', () => {
-    currentFile = null;
-    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-    currentBlobUrl = null;
-    showFotoScreen('capture');
-    setStatus("PRONTA (MODALITÀ: FOTO)");
-  });
-
-  // RESULTS DEMO DATA
-  function getDemoProducts(contextLabel){
-    // NOTA: demo generica; poi qui agganceremo Shopify/ETOS
-    const demo = [
-      {name:"ABITO LUNGO CON SPACCO", info:"COLORE SIMILE • LINEA SIMILE", sizes:["42","44 DISP.","46"], okIndex:1},
-      {name:"ABITO SCIVOLATO ELEGANTE", info:"DETTAGLIO SIMILE • TONO SIMILE", sizes:["40","42 DISP.","44"], okIndex:1},
-      {name:"ABITO STRUTTURATO", info:"ALTERNATIVA VICINA • MODELLO AFFINE", sizes:["44 DISP.","46"], okIndex:0},
-      {name:"ABITO MONOSPALLA", info:"VARIANTE STILE • COLORE VICINO", sizes:["42","44 DISP."], okIndex:1},
-      {name:"ABITO CON SCHIENA APERTA", info:"DETTAGLIO FORTE • LINEA SIMILE", sizes:["44 DISP.","48"], okIndex:0},
-    ];
-
-    // piccola variazione “per contesto” (solo testo)
-    if(contextLabel){
-      demo.forEach(d => d.info = d.info + " • " + contextLabel);
-    }
-    return demo;
-  }
-
-  function renderResults(contextLabel){
-    const demo = getDemoProducts(contextLabel);
-
-    resultsList.innerHTML = "";
-    demo.slice(0,5).forEach((p, idx) => {
-      const div = document.createElement('div');
-      div.className = "item";
-      div.innerHTML = `
-        <div class="thumb">FOTO</div>
-        <div class="meta">
-          <div class="name">${idx+1}. ${p.name}</div>
-          <div class="line">${p.info}</div>
-          <div class="stock">
-            ${p.sizes.map((s,i)=> `<span class="pill ${i===p.okIndex?'ok':''}">${s}</span>`).join('')}
+      <!-- CODICE -->
+      <div id="panelCodice" class="hidden">
+        <div class="hero">
+          <div class="iconBox">🔎</div>
+          <h1>cerca per codice</h1>
+          <input id="skuInput" type="text" placeholder="es. t00251">
+          <div class="actions">
+            <button class="primary" id="btnSku">cerca simili</button>
           </div>
         </div>
-      `;
-      resultsList.appendChild(div);
-    });
-  }
+      </div>
 
-  async function openResults(subline, contextLabel){
-    resultsSubline.textContent = subline;
-    showPanel('results');
-    setStatus("ELABORAZIONE... (DEMO)");
-    resultsList.innerHTML = "";
+      <!-- FILTRI -->
+      <div id="panelFiltri" class="hidden">
+        <div class="sectionTitle">linea</div>
+        <div class="pills">
+          <div class="pill" data-tag="MORBIDO">morbido</div>
+          <div class="pill" data-tag="SCIVOLATO">scivolato</div>
+          <div class="pill" data-tag="SIRENA">sirena</div>
+        </div>
+      </div>
 
-    // simulazione AI
-    await new Promise(r => setTimeout(r, 900));
+      <!-- RISULTATI -->
+      <div id="panelResults" class="hidden"></div>
 
-    renderResults(contextLabel);
-    setStatus("RISULTATI PRONTI (DEMO).");
-  }
+      <div class="status" id="statusLine">stato: pronta</div>
 
-  btnUsePhoto.addEventListener('click', async () => {
-    if(!currentFile) return;
-    activePanelBeforeResults = 'foto';
-    await openResults("RISULTATI DA FOTO (DEMO)", "FOTO");
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIG SHOPIFY (MODIFICA SOLO IL TOKEN) ===== */
+const SHOP_DOMAIN = "charmecanaris.myshopify.com";
+const STOREFRONT_TOKEN = "INSERISCI_QUI_IL_TUO_TOKEN";
+const API_VERSION = "2024-07";
+const API_URL = `https://${SHOP_DOMAIN}/api/${API_VERSION}/graphql.json`;
+
+async function shopify(query, variables={}) {
+  const r = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "X-Shopify-Storefront-Access-Token":STOREFRONT_TOKEN
+    },
+    body:JSON.stringify({query,variables})
   });
+  const j = await r.json();
+  return j.data;
+}
 
-  // CODICE EVENTS
-  btnSearchSku.addEventListener('click', async () => {
-    const sku = (skuInput.value || "").trim().toUpperCase();
-    if(!sku){
-      setStatus("INSERISCI UN CODICE/SKU.");
-      skuInput.focus();
-      return;
-    }
-    activePanelBeforeResults = 'codice';
-    await openResults(`RISULTATI PER CODICE: ${sku} (DEMO)`, `SKU ${sku}`);
-  });
+function productUrl(handle){
+  return `https://charmecanaris.shop/products/${handle}`;
+}
 
-  btnClearSku.addEventListener('click', () => {
-    skuInput.value = "";
-    skuInput.focus();
-    setStatus("PRONTA (MODALITÀ: CODICE)");
-  });
+/* ===== UI ===== */
+const tabFoto=document.getElementById("tabFoto");
+const tabCodice=document.getElementById("tabCodice");
+const tabFiltri=document.getElementById("tabFiltri");
+const panelFoto=document.getElementById("panelFoto");
+const panelCodice=document.getElementById("panelCodice");
+const panelFiltri=document.getElementById("panelFiltri");
+const panelResults=document.getElementById("panelResults");
+const statusLine=document.getElementById("statusLine");
 
-  skuInput.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter'){
-      e.preventDefault();
-      btnSearchSku.click();
-    }
-  });
+function show(panel){
+  [panelFoto,panelCodice,panelFiltri,panelResults].forEach(p=>p.classList.add("hidden"));
+  panel.classList.remove("hidden");
+}
 
-  // FILTRI EVENTS
-  function updateFiltersNote(){
-    const picks = Object.values(selected).filter(Boolean).length;
-    if(picks < 2){
-      filtersNote.textContent = "SELEZIONA ALMENO 2 TAG PER PROCEDERE.";
-    }else{
-      const parts = [];
-      if(selected.linea) parts.push("LINEA: " + selected.linea);
-      if(selected.lunghezza) parts.push("LUNGHEZZA: " + selected.lunghezza);
-      if(selected.scollo) parts.push("SCOLLO: " + selected.scollo);
-      filtersNote.textContent = "SELEZIONATI: " + parts.join(" • ");
-    }
-  }
-
-  function handlePillClick(btn){
-    const group = btn.dataset.group;
-    const value = btn.dataset.value;
-
-    // single-select per gruppo
-    const groupButtons = document.querySelectorAll(`.pillBtn[data-group="${group}"]`);
-    groupButtons.forEach(b => b.classList.remove('active'));
-
-    if(selected[group] === value){
-      // toggle off
-      selected[group] = null;
-    }else{
-      btn.classList.add('active');
-      selected[group] = value;
-    }
-
-    updateFiltersNote();
-  }
-
-  document.querySelectorAll('.pillBtn').forEach(btn => {
-    btn.addEventListener('click', () => handlePillClick(btn));
-  });
-
-  btnResetFilters.addEventListener('click', () => {
-    selected.linea = null;
-    selected.lunghezza = null;
-    selected.scollo = null;
-    document.querySelectorAll('.pillBtn').forEach(b => b.classList.remove('active'));
-    updateFiltersNote();
-    setStatus("PRONTA (MODALITÀ: FILTRI)");
-  });
-
-  btnSearchFilters.addEventListener('click', async () => {
-    const picks = Object.values(selected).filter(Boolean).length;
-    if(picks < 2){
-      setStatus("SELEZIONA ALMENO 2 TAG.");
-      return;
-    }
-
-    const context = ["FILTRI"];
-    if(selected.linea) context.push(selected.linea);
-    if(selected.lunghezza) context.push(selected.lunghezza);
-    if(selected.scollo) context.push(selected.scollo);
-
-    activePanelBeforeResults = 'filtri';
-    await openResults("RISULTATI DA FILTRI (DEMO)", context.join(" • "));
-  });
-
-  // RESULTS NAV
-  btnBack.addEventListener('click', () => {
-    // torna alla schermata da cui arrivavi
-    goToMode(activePanelBeforeResults);
-  });
-
-  btnDone.addEventListener('click', () => {
-    // chiude e torna a foto (home)
-    goToMode('foto');
-  });
-
-  // INIT
-  goToMode('foto');
+tabFoto.onclick=()=>show(panelFoto);
+tabCodice.onclick=()=>show(panelCodice);
+tabFiltri.onclick=()=>show(panelFiltri);
 </script>
+
 </body>
 </html>
