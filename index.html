@@ -659,18 +659,12 @@
 
       // NOTA: STOREFRONT NON GARANTISCE RICERCA SKU DIRETTA IN TUTTI I NEGOZI.
       // QUI PROVIAMO 3 STRADE: sku:, title:, tag:
-      const tries = [
-        `sku:${code}`,
-        `${code}`,
-        `tag:${code}`
-      ];
+     const s = `tag:${code}`;
+const products = await fetchProductsBySearch(s);
 
-      let products = [];
-      for (const s of tries) {
-        products = await fetchProductsBySearch(s);
-        if (products.length) break;
-      }
-
+skuPill.textContent = `${products.length} TROVATI`;
+if (!products.length) { skuEmpty.style.display = "block"; return; }
+renderProducts(skuGrid, products);
       skuPill.textContent = `${products.length} TROVATI`;
 
       if (!products.length) {
@@ -745,4 +739,5 @@
   </script>
 </body>
 </html>
+
 
