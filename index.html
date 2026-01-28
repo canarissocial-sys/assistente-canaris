@@ -382,7 +382,7 @@
         <!-- TABS -->
         <div class="tabs">
           <div class="tab active" data-tab="foto">FOTO<small>SCATTA / CARICA</small></div>
-          <div class="tab" data-tab="codice">CODICE<small>INSERISCI SKU</small></div>
+          <div class="tab" data-tab="codice">CODICE<small>CERCA PER TAG</small></div>
           <div class="tab" data-tab="filtri">FILTRI<small>TAG RAPIDI</small></div>
         </div>
 
@@ -402,7 +402,6 @@
               <button class="secondary" id="btn-galleria">📁 CARICA DALLA GALLERIA</button>
             </div>
 
-            <!-- input reali (nascosti) -->
             <input id="input-camera" type="file" accept="image/*" capture="environment" hidden>
             <input id="input-gallery" type="file" accept="image/*" hidden>
           </div>
@@ -410,10 +409,10 @@
           <div class="resultsWrap" id="foto-results" style="display:none;">
             <div class="resultsHead">
               <div class="left">RISULTATI (DEMO)</div>
-              <div class="pill" id="foto-pill">0 TROVATI</div>
+              <div class="pill" id="foto-pill">DEMO</div>
             </div>
             <div class="notice">
-              MODALITÀ FOTO: PER ORA È SOLO DEMO UI. PIÙ AVANTI COLLEGHIAMO STYLE AI PER TROVARE “SIMILI” DAVVERO.
+              MODALITÀ FOTO: UI PRONTA. DOPO COLLEGHIAMO STYLE AI PER IL “SIMILE” REALE.
             </div>
           </div>
 
@@ -427,28 +426,28 @@
 
             <h1>CERCA PER CODICE</h1>
             <p class="sub">
-              INSERISCI UNO SKU/CODICE ARTICOLO. POI TI MOSTRA I RISULTATI (SHOPIFY).
+              INSERISCI IL CODICE DELL’ETICHETTA. IL CODICE È UN TAG SU SHOPIFY.
             </p>
           </div>
 
           <div class="form">
-            <label for="skuInput">CODICE / SKU</label>
-            <input id="skuInput" placeholder="ES. T00251" autocomplete="off" />
+            <label for="codeInput">CODICE ETICHETTA (TAG)</label>
+            <input id="codeInput" placeholder="ES. T00251" autocomplete="off" />
 
             <div class="miniRow">
-              <button class="primary" id="btn-sku">CERCA SIMILI</button>
-              <button class="secondary" id="btn-sku-clear">PULISCI</button>
+              <button class="primary" id="btn-code">CERCA</button>
+              <button class="secondary" id="btn-code-clear">PULISCI</button>
             </div>
           </div>
 
-          <div class="resultsWrap" id="sku-results" style="display:none;">
+          <div class="resultsWrap" id="code-results" style="display:none;">
             <div class="resultsHead">
               <div class="left">RISULTATI SHOPIFY</div>
-              <div class="pill" id="sku-pill">0 TROVATI</div>
+              <div class="pill" id="code-pill">0 TROVATI</div>
             </div>
-            <div class="grid" id="sku-grid"></div>
-            <div class="notice" id="sku-empty" style="display:none; margin-top:10px;">
-              NESSUN RISULTATO. (SE LO SKU NON È RICERCABILE IN STOREFRONT, LO RENDIAMO RICERCABILE CON TAG O METAFIELD.)
+            <div class="grid" id="code-grid"></div>
+            <div class="notice" id="code-empty" style="display:none; margin-top:10px;">
+              NESSUN RISULTATO. CONTROLLA CHE IL TAG SIA IDENTICO AL CODICE INSERITO.
             </div>
           </div>
 
@@ -462,12 +461,12 @@
 
             <h1>FILTRI RAPIDI</h1>
             <p class="sub">
-              SELEZIONA 2–3 TAG (LINEA, LUNGHEZZA, SCOLLO). POI TI MOSTRA GLI ABITI (SHOPIFY).
+              SELEZIONA 1–3 TAG (LINEA, LUNGHEZZA, SCOLLO). POI TI MOSTRA GLI ABITI.
             </p>
           </div>
 
           <div class="sectionTitle">LINEA</div>
-          <div class="tags" data-group="linea">
+          <div class="tags">
             <div class="tag">MORBIDO</div>
             <div class="tag">SCIVOLATO</div>
             <div class="tag">SIRENA</div>
@@ -477,13 +476,13 @@
           </div>
 
           <div class="sectionTitle">LUNGHEZZA</div>
-          <div class="tags" data-group="lunghezza">
+          <div class="tags">
             <div class="tag">ABITI CORTI</div>
             <div class="tag">ABITI LUNGHI</div>
           </div>
 
           <div class="sectionTitle">SCOLLO</div>
-          <div class="tags" data-group="scollo">
+          <div class="tags">
             <div class="tag">A V</div>
             <div class="tag">OMERALE</div>
             <div class="tag">BRETELLA LARGA</div>
@@ -492,7 +491,7 @@
           </div>
 
           <div class="actions" style="margin-top:18px;">
-            <button class="primary" id="btn-filtri">TROVA SIMILI</button>
+            <button class="primary" id="btn-filtri">TROVA</button>
             <button class="secondary" id="btn-reset">RESET</button>
           </div>
 
@@ -503,7 +502,7 @@
             </div>
             <div class="grid" id="tag-grid"></div>
             <div class="notice" id="tag-empty" style="display:none; margin-top:10px;">
-              NESSUN RISULTATO. (VUOL DIRE CHE QUESTI TAG NON SONO PRESENTI SU SHOPIFY O NON COMBACIANO.)
+              NESSUN RISULTATO. TAG NON PRESENTI O NON COMBACIANO.
             </div>
           </div>
 
@@ -516,12 +515,12 @@
   </div>
 
   <script>
-    /* =========================================
-       CONFIG SHOPIFY (GIÀ COMPLETATO)
-       ========================================= */
+    /* =========================
+       CONFIG SHOPIFY
+       ========================= */
     const SHOP_DOMAIN = "charmecanaris.it";
     const STOREFRONT_TOKEN = "e94f7ce2cd0da2ee9f57e32f65af1f40";
-    const API_VERSION = "2024-10"; // va bene così
+    const API_VERSION = "2024-10";
 
     async function shopifyGraphQL(query) {
       const res = await fetch(`https://${SHOP_DOMAIN}/api/${API_VERSION}/graphql.json`, {
@@ -536,6 +535,14 @@
       const data = await res.json();
       if (data.errors) console.error("SHOPIFY ERRORS:", data.errors);
       return data;
+    }
+
+    function escapeForGraphQL(str) {
+      return String(str)
+        .replaceAll("\\", "\\\\")
+        .replaceAll('"', '\\"')
+        .replaceAll("\n", " ")
+        .trim();
     }
 
     async function fetchProductsBySearch(searchString) {
@@ -559,14 +566,6 @@
       return edges.map(e => e.node);
     }
 
-    function escapeForGraphQL(str) {
-      return String(str)
-        .replaceAll("\\", "\\\\")
-        .replaceAll('"', '\\"')
-        .replaceAll("\n", " ")
-        .trim();
-    }
-
     function renderProducts(gridEl, products) {
       gridEl.innerHTML = "";
       products.forEach(p => {
@@ -587,9 +586,9 @@
       });
     }
 
-    /* =========================================
+    /* =========================
        UI: TABS
-       ========================================= */
+       ========================= */
     const tabs = document.querySelectorAll(".tab");
     const panels = {
       foto: document.getElementById("panel-foto"),
@@ -608,9 +607,9 @@
       });
     });
 
-    /* =========================================
+    /* =========================
        FOTO: DEMO INPUT
-       ========================================= */
+       ========================= */
     const inputCamera = document.getElementById("input-camera");
     const inputGallery = document.getElementById("input-gallery");
     const btnScatta = document.getElementById("btn-scatta");
@@ -623,62 +622,56 @@
       if (!file) return;
       document.getElementById("foto-results").style.display = "block";
       document.getElementById("foto-pill").textContent = "DEMO";
-      // QUI POI COLLEGHIAMO STYLE AI
       console.log("FOTO CARICATA:", file.name, file.size);
     }
 
     inputCamera.addEventListener("change", (e) => handlePhoto(e.target.files?.[0]));
     inputGallery.addEventListener("change", (e) => handlePhoto(e.target.files?.[0]));
 
-    /* =========================================
-       CODICE / SKU: RICERCA SHOPIFY
-       ========================================= */
-    const skuInput = document.getElementById("skuInput");
-    const btnSku = document.getElementById("btn-sku");
-    const btnSkuClear = document.getElementById("btn-sku-clear");
-    const skuResults = document.getElementById("sku-results");
-    const skuGrid = document.getElementById("sku-grid");
-    const skuPill = document.getElementById("sku-pill");
-    const skuEmpty = document.getElementById("sku-empty");
+    /* =========================
+       CODICE: CERCA SOLO PER TAG
+       ========================= */
+    const codeInput = document.getElementById("codeInput");
+    const btnCode = document.getElementById("btn-code");
+    const btnCodeClear = document.getElementById("btn-code-clear");
+    const codeResults = document.getElementById("code-results");
+    const codeGrid = document.getElementById("code-grid");
+    const codePill = document.getElementById("code-pill");
+    const codeEmpty = document.getElementById("code-empty");
 
-    btnSkuClear.addEventListener("click", () => {
-      skuInput.value = "";
-      skuResults.style.display = "none";
-      skuGrid.innerHTML = "";
-      skuEmpty.style.display = "none";
+    btnCodeClear.addEventListener("click", () => {
+      codeInput.value = "";
+      codeResults.style.display = "none";
+      codeGrid.innerHTML = "";
+      codeEmpty.style.display = "none";
     });
 
-    btnSku.addEventListener("click", async () => {
-      const code = skuInput.value.trim();
+    btnCode.addEventListener("click", async () => {
+      const code = codeInput.value.trim();
       if (!code) return;
 
-      skuResults.style.display = "block";
-      skuPill.textContent = "CERCO...";
-      skuEmpty.style.display = "none";
-      skuGrid.innerHTML = "";
+      codeResults.style.display = "block";
+      codePill.textContent = "CERCO...";
+      codeEmpty.style.display = "none";
+      codeGrid.innerHTML = "";
 
-      // NOTA: STOREFRONT NON GARANTISCE RICERCA SKU DIRETTA IN TUTTI I NEGOZI.
-      // QUI PROVIAMO 3 STRADE: sku:, title:, tag:
-     const s = `tag:${code}`;
-const products = await fetchProductsBySearch(s);
+      const search = `tag:${code}`;
+      const products = await fetchProductsBySearch(search);
 
-skuPill.textContent = `${products.length} TROVATI`;
-if (!products.length) { skuEmpty.style.display = "block"; return; }
-renderProducts(skuGrid, products);
-      skuPill.textContent = `${products.length} TROVATI`;
+      codePill.textContent = `${products.length} TROVATI`;
 
       if (!products.length) {
-        skuEmpty.style.display = "block";
+        codeEmpty.style.display = "block";
         return;
       }
 
-      renderProducts(skuGrid, products);
+      renderProducts(codeGrid, products);
     });
 
-    /* =========================================
+    /* =========================
        FILTRI: TAG + RICERCA SHOPIFY
-       ========================================= */
-    const tagBlocks = document.querySelectorAll(".tags .tag");
+       ========================= */
+    const tagBlocks = document.querySelectorAll(".tag");
     const btnFiltri = document.getElementById("btn-filtri");
     const btnReset = document.getElementById("btn-reset");
 
@@ -688,9 +681,7 @@ renderProducts(skuGrid, products);
     const tagEmpty = document.getElementById("tag-empty");
 
     tagBlocks.forEach(tag => {
-      tag.addEventListener("click", () => {
-        tag.classList.toggle("on");
-      });
+      tag.addEventListener("click", () => tag.classList.toggle("on"));
     });
 
     btnReset.addEventListener("click", () => {
@@ -717,7 +708,6 @@ renderProducts(skuGrid, products);
         return;
       }
 
-      // Costruiamo query "tag:AAA AND tag:BBB ..."
       const search = selected.map(t => `tag:${t}`).join(" AND ");
       const products = await fetchProductsBySearch(search);
 
@@ -732,12 +722,7 @@ renderProducts(skuGrid, products);
       renderProducts(tagGrid, products);
     });
 
-    /* =========================================
-       TEST (CONSOLE): SE VUOI, LASCIALO
-       ========================================= */
-    console.log("ASSISTENTE CANARIS OK. TOKEN CARICATO.");
+    console.log("ASSISTENTE CANARIS OK. MODALITÀ CODICE = TAG.");
   </script>
 </body>
 </html>
-
-
