@@ -655,7 +655,7 @@
       codeEmpty.style.display = "none";
       codeGrid.innerHTML = "";
 
-      const search = `tag:${code}`;
+      const search = 'tag:${code}';
       const products = await fetchProductsBySearch(search);
 
       codePill.textContent = `${products.length} TROVATI`;
@@ -726,4 +726,5 @@
   </script>
 </body>
 </html>
+
 
